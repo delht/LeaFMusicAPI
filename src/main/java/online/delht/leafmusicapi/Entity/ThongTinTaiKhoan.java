@@ -1,9 +1,11 @@
 package online.delht.leafmusicapi.Entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import static jakarta.persistence.GenerationType.*;
 
+@Data
 @Entity
 @Table(name = "thongtin_taikhoan")
 public class ThongTinTaiKhoan {
@@ -13,7 +15,7 @@ public class ThongTinTaiKhoan {
 
     @ManyToOne
     @JoinColumn(name = "id_taikhoan")
-    private TaiKhoan taikhoan;
+    private TaiKhoan id_taikhoan;
 
     private String ten_taikhoan;
 

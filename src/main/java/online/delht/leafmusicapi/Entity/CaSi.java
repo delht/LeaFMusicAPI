@@ -1,6 +1,7 @@
 package online.delht.leafmusicapi.Entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.Set;
 
@@ -16,9 +17,9 @@ public class CaSi {
 
     private String url_hinh;
 
-    @OneToMany(mappedBy = "casi")
+    @OneToMany(mappedBy = "id_casi")
     private Set<BaiHat> baiHats;
 
-    @OneToMany(mappedBy = "casi")
+    @OneToMany(mappedBy = "id_casi")
     private Set<Album> albums;
 }

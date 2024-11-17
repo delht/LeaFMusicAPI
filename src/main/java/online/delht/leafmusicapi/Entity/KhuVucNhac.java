@@ -1,9 +1,11 @@
 package online.delht.leafmusicapi.Entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.Set;
 
+@Data
 @Entity
 @Table(name = "khuvuc_nhac")
 public class KhuVucNhac {

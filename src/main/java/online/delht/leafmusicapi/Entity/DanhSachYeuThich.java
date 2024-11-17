@@ -1,9 +1,11 @@
 package online.delht.leafmusicapi.Entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.Set;
 
+@Data
 @Entity
 @Table(name = "ds_yeuthich")
 public class DanhSachYeuThich {
@@ -13,7 +15,7 @@ public class DanhSachYeuThich {
 
     @ManyToOne
     @JoinColumn(name = "id_taikhoan")
-    private TaiKhoan taikhoan;
+    private TaiKhoan id_taikhoan;
 
     @Column(nullable = false)
     private String ten_danhsach;
@@ -25,5 +27,4 @@ public class DanhSachYeuThich {
             inverseJoinColumns = @JoinColumn(name = "id_baihat")
     )
     private Set<BaiHat> baiHats;
-
 }

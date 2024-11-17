@@ -1,9 +1,11 @@
 package online.delht.leafmusicapi.Entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.Set;
 
+@Data
 @Entity
 @Table(name = "album")
 public class Album {
@@ -16,13 +18,14 @@ public class Album {
 
     @ManyToOne
     @JoinColumn(name = "id_casi")
-    private CaSi casi;
+    private CaSi id_casi;
 
     @Column(nullable = true)
     private String url_hinh;
 
     private String ngay_phathanh;
 
-    @OneToMany(mappedBy = "album")
+    @OneToMany(mappedBy = "id_album")
     private Set<BaiHat> baiHats;
+
 }

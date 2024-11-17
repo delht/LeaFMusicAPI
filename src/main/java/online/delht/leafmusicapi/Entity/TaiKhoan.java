@@ -1,7 +1,9 @@
 package online.delht.leafmusicapi.Entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
+@Data
 @Entity
 @Table(name = "taikhoan")
 public class TaiKhoan {
