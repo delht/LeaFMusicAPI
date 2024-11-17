@@ -1,21 +1,21 @@
 package online.delht.leafmusicapi.Entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.util.Set;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "theloai")
 public class TheLoai {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_theloai;
+    @Column(name = "id_theloai")
+    private Integer idTheLoai;
 
-    @Column(nullable = false, unique = true)
-    private String ten_theloai;
-
-    @OneToMany(mappedBy = "theloai")
-    private Set<BaiHat> baiHats;
+    @Column(name = "ten_theloai", nullable = false, unique = true)
+    private String tenTheLoai;
 }

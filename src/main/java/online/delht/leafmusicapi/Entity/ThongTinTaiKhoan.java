@@ -1,26 +1,32 @@
 package online.delht.leafmusicapi.Entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import static jakarta.persistence.GenerationType.*;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "thongtin_taikhoan")
 public class ThongTinTaiKhoan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_Thongtin;
+    @Column(name = "id_thongtin")
+    private Integer idThongTin;
 
-    @ManyToOne
-    @JoinColumn(name = "id_taikhoan")
-    private TaiKhoan id_taikhoan;
+    @OneToOne
+    @JoinColumn(name = "id_taikhoan", nullable = false, foreignKey = @ForeignKey(name = "fk_thongtin_taikhoan"))
+    private TaiKhoan taiKhoan;
 
-    private String ten_taikhoan;
+    @Column(name = "ten_taikhoan")
+    private String tenTaiKhoan;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
+    @Column(name = "sdt", length = 20)
     private String sdt;
 }
+

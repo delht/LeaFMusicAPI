@@ -1,26 +1,32 @@
 package online.delht.leafmusicapi.Entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "taikhoan")
 public class TaiKhoan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_taikhoan;
+    @Column(name = "id_taikhoan")
+    private Integer idTaiKhoan;
 
-    @Column(nullable = false, unique = true)
+    @Column(name = "username", nullable = false, unique = true)
     private String username;
 
-    @Column(nullable = false)
+    @Column(name = "password", nullable = false)
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
-    private VaiTro vaitro;
+    @Column(name = "vaitro", columnDefinition = "ENUM('user', 'admin') DEFAULT 'user'")
+    private VaiTro vaiTro;
 
-
+    public enum VaiTro {
+        USER, ADMIN
+    }
 }
-

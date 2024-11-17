@@ -1,31 +1,34 @@
 package online.delht.leafmusicapi.Entity;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import java.util.Set;
+import java.time.LocalDateTime;
 
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 @Entity
 @Table(name = "album")
 public class Album {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id_album;
+    @Column(name = "id_album")
+    private Integer idAlbum;
 
-    @Column(nullable = false)
-    private String ten_album;
+    @Column(name = "ten_album", nullable = false)
+    private String tenAlbum;
 
     @ManyToOne
-    @JoinColumn(name = "id_casi")
-    private CaSi id_casi;
+    @JoinColumn(name = "id_casi", foreignKey = @ForeignKey(name = "fk_album_casi"))
+    private CaSi caSi;
 
-    @Column(nullable = true)
-    private String url_hinh;
+    @Column(name = "url_hinh", length = 255)
+    private String urlHinh;
 
-    private String ngay_phathanh;
-
-    @OneToMany(mappedBy = "id_album")
-    private Set<BaiHat> baiHats;
+    @Column(name = "ngay_phathanh", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
+    private LocalDateTime ngayPhatHanh;
 
 }
