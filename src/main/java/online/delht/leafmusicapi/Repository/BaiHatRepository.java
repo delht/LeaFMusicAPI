@@ -6,4 +6,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface BaiHatRepository extends JpaRepository<BaiHat, String> {
+    boolean existsBaiHatByTenBaiHat(String tenBaiHat);
 }

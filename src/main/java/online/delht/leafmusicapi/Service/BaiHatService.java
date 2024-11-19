@@ -1,47 +1,36 @@
 package online.delht.leafmusicapi.Service;
 
+import lombok.AccessLevel;
+import lombok.RequiredArgsConstructor;
+import lombok.experimental.FieldDefaults;
 import online.delht.leafmusicapi.Entity.BaiHat;
+import online.delht.leafmusicapi.Mapper.BaiHat.BaiHatMapper;
 import online.delht.leafmusicapi.Repository.BaiHatRepository;
-import online.delht.leafmusicapi.dto.reponse.BaiHat_GetRespone;
-import online.delht.leafmusicapi.dto.reponse.CaSi_GetRespone;
+import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_GetRespone;
 import online.delht.leafmusicapi.dto.request.BaiHat_CreateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 @Service
+@RequiredArgsConstructor //bo autowired
+@FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true) //bo private
 public class BaiHatService {
-    @Autowired
+//    @Autowired
     private BaiHatRepository baiHatRepository;
+//    @Autowired
+    private BaiHatMapper baiHatMapper;
 
     public BaiHat createBaiHat(BaiHat_CreateRequest request) {
-        BaiHat baiHat = new BaiHat();
-
-        baiHat.setTenBaiHat(request.getTenBaiHat());
-        baiHat.setCaSi(request.getCaSi());
-        baiHat.setTheLoai(request.getTheLoai());
-        baiHat.setKhuVucNhac(request.getKhuVucNhac());
-        baiHat.setUrlHinh(request.getUrlHinh());
-        baiHat.setNgayPhatHanh(request.getNgayPhatHanh());
-
+        if(baiHatRepository.existsBaiHatByTenBaiHat(request.getTenBaiHat()))
+            throw new RuntimeException("Da co ten bai hat nay");
+        BaiHat baiHat = baiHatMapper.toBaiHat(request);
         return baiHatRepository.save(baiHat);
     }
 
-//    public BaiHat getBaiHatById(String id) {
-//        return baiHatRepository.findById(id).orElseThrow(() -> new RuntimeException("BaiHat not found"));
-//    }
-
     public BaiHat_GetRespone getBaiHatById(String id) {
-        BaiHat baiHat = baiHatRepository.findById(id).orElseThrow(()-> new RuntimeException("Khong co bai hat vs id nay"));
+        BaiHat baiHat = baiHatRepository.findById(id).orElseThrow(()-> new RuntimeException("Khong tim thay bai hat"));
 
-        CaSi_GetRespone caSiGetRespone = CaSi_GetRespone.builder()
-                .tenCaSi(baiHat.getCaSi().getTenCaSi())
-                .build();
-
-        return BaiHat_GetRespone.builder()
-                .tenBaiHat(baiHat.getTenBaiHat())
-                .caSi(caSiGetRespone)
-                .theLoai(baiHat.getTheLoai().getTenTheLoai())
-                .build();
+        return baiHatMapper.toBaiHat_GetRespone(baiHat);
 
     }
 }
