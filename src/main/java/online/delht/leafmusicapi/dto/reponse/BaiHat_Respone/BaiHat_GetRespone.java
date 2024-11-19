@@ -9,7 +9,6 @@ import online.delht.leafmusicapi.Entity.Album;
 import online.delht.leafmusicapi.Entity.CaSi;
 import online.delht.leafmusicapi.Entity.KhuVucNhac;
 import online.delht.leafmusicapi.Entity.TheLoai;
-import online.delht.leafmusicapi.dto.reponse.CaSi_Respone.CaSi_GetRespone;
 
 import java.time.LocalDateTime;
 
@@ -18,12 +17,20 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Builder
 public class BaiHat_GetRespone {
+
+    private Integer idBaiHat;
+
     private String tenBaiHat;
-//    private CaSi caSi;
-//    private TheLoai theLoai;
-    private CaSi_GetRespone caSi;
-    private TheLoai theLoai;
 
+    private String caSi;
 
+    private String theLoai;
 
+    private String album;
+
+    private String khuVucNhac;
+
+    private String urlHinh;
+
+    private LocalDateTime ngayPhatHanh;
 }

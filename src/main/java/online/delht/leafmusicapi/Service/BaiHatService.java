@@ -6,10 +6,12 @@ import lombok.experimental.FieldDefaults;
 import online.delht.leafmusicapi.Entity.BaiHat;
 import online.delht.leafmusicapi.Mapper.BaiHat.BaiHatMapper;
 import online.delht.leafmusicapi.Repository.BaiHatRepository;
+import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_ChiTiet_GetRespone;
 import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_GetRespone;
 import online.delht.leafmusicapi.dto.request.BaiHat_CreateRequest;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor //bo autowired
@@ -27,10 +29,15 @@ public class BaiHatService {
         return baiHatRepository.save(baiHat);
     }
 
-    public BaiHat_GetRespone getBaiHatById(String id) {
-        BaiHat baiHat = baiHatRepository.findById(id).orElseThrow(()-> new RuntimeException("Khong tim thay bai hat"));
-
-        return baiHatMapper.toBaiHat_GetRespone(baiHat);
-
+    public BaiHat_ChiTiet_GetRespone getBaiHatById(String id) {
+        BaiHat baiHat = baiHatRepository.findById(id)
+                .orElseThrow(()-> new RuntimeException("Khong tim thay bai hat theo id nay"));
+        return baiHatMapper.toBaiHat_ChiTiet_GetRespone(baiHat);
     }
+    public BaiHat_ChiTiet_GetRespone getBaiHatByTenBaiHat(String tenBaiHat) {
+        BaiHat baiHat = baiHatRepository.findByTenBaiHat(tenBaiHat)
+                .orElseThrow(()-> new RuntimeException("Khong tim thay bai hat theo ten"));
+        return  baiHatMapper.toBaiHat_ChiTiet_GetRespone(baiHat);
+    }
+
 }
