@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import online.delht.leafmusicapi.Entity.CaSi;
-import online.delht.leafmusicapi.Mapper.BaiHat.CaSiMapper;
+import online.delht.leafmusicapi.Mapper.CaSiMapper;
 import online.delht.leafmusicapi.Repository.CaSiRepository;
 import online.delht.leafmusicapi.dto.reponse.CaSi_Respone.CaSi_Album_GetRespone;
 import online.delht.leafmusicapi.dto.reponse.CaSi_Respone.CaSi_BaiHat_GetRespone;

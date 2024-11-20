@@ -1,4 +1,4 @@
-package online.delht.leafmusicapi.Mapper.BaiHat;
+package online.delht.leafmusicapi.Mapper;
 
 import online.delht.leafmusicapi.Entity.BaiHat;
 import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_ChiTiet_GetRespone;
