@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -30,5 +31,10 @@ public class Album {
 
     @Column(name = "ngay_phathanh", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime ngayPhatHanh;
+
+//====================
+
+    @OneToMany(mappedBy = "album")
+    private List<BaiHat> baiHats;
 
 }

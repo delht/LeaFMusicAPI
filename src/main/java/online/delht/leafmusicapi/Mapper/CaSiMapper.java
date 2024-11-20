@@ -41,26 +41,5 @@ public interface CaSiMapper {
     // Ánh xạ danh sách bài hát
     List<BaiHat_GetRespone> to_BaiHat_GetRespone_List(List<BaiHat> baiHats);
 
-    // Hàm tùy chỉnh để ánh xạ sang String
-
-//    @Named("mapCaSiToString")
-//    default String mapCaSiToString(CaSi caSi) {
-//        return caSi != null ? caSi.getTenCaSi() : null;
-//    }
-//
-//    @Named("mapTheLoaiToString")
-//    default String mapTheLoaiToString(TheLoai theLoai) {
-//        return theLoai != null ? theLoai.getTenTheLoai() : null;
-//    }
-//
-//    @Named("mapAlbumToString")
-//    default String mapAlbumToString(Album album) {
-//        return album != null ? album.getTenAlbum() : null;
-//    }
-//
-//    @Named("mapKhuVucNhacToString")
-//    default String mapKhuVucNhacToString(KhuVucNhac khuVucNhac) {
-//        return khuVucNhac != null ? khuVucNhac.getTenKhuVuc() : null;
-//    }
 
 }
