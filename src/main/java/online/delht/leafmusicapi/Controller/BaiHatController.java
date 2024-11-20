@@ -14,6 +14,13 @@ public class BaiHatController {
     @Autowired
     private BaiHatService baiHatService;
 
+//    ==========================================================================================
+
+    @PostMapping("/them")
+    BaiHat createBaiHat(@RequestBody BaiHat_CreateRequest request) {
+        return baiHatService.createBaiHat(request);
+    }
+
     @GetMapping("/get/id={id}")
     ResponseEntity<BaiHat_ChiTiet_GetRespone> getBaiHatById(@PathVariable String id) {
         BaiHat_ChiTiet_GetRespone baihat = baiHatService.getBaiHatById(id);
@@ -32,14 +39,6 @@ public class BaiHatController {
     }
 
 
-
-
-
-
-    @PostMapping("/them")
-    BaiHat createBaiHat(@RequestBody BaiHat_CreateRequest request) {
-        return baiHatService.createBaiHat(request);
-    }
 
 
 

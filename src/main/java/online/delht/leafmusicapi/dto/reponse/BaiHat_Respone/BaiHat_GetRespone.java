@@ -19,18 +19,11 @@ import java.time.LocalDateTime;
 public class BaiHat_GetRespone {
 
     private Integer idBaiHat;
-
     private String tenBaiHat;
-
     private String caSi;
-
     private String theLoai;
-
     private String album;
-
     private String khuVucNhac;
-
     private String urlHinh;
-
     private LocalDateTime ngayPhatHanh;
 }

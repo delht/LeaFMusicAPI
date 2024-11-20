@@ -7,6 +7,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.FieldDefaults;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -23,5 +25,11 @@ public class CaSi {
 
     @Column(name = "url_hinh")
     private String urlHinh;
+
+    @OneToMany(mappedBy = "caSi")
+    private List<Album> albums;
+
+    @OneToMany(mappedBy = "caSi")
+    private List<BaiHat> baiHats;
 
 }

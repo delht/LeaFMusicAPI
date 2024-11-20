@@ -1,6 +1,7 @@
-package online.delht.leafmusicapi.dto.reponse.CaSi_Respone;
+package online.delht.leafmusicapi.dto.reponse.KhuVuc_Respone;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,10 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@JsonInclude(JsonInclude.Include.NON_NULL)
-public class CaSi_GetRespone {
+public class KhuVuc_Respone {
 
-    private int idCaSi;
-    private String tenCaSi;
-    private String urlHinh;
+    private Integer idKhuVuc;
+    private String tenKhuVuc;
 }
