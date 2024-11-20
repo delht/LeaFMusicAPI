@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -18,4 +20,8 @@ public class TheLoai {
 
     @Column(name = "ten_theloai", nullable = false, unique = true)
     private String tenTheLoai;
+
+
+    @OneToMany(mappedBy = "theLoai")
+    private List<BaiHat> baiHats;
 }

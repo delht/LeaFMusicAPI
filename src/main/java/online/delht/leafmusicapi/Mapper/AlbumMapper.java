@@ -34,6 +34,5 @@ public interface AlbumMapper {
             @Mapping(source = "urlHinh", target = "urlHinh"),
             @Mapping(source = "ngayPhatHanh", target = "ngayPhatHanh")
     })
-
     BaiHat_ForAlbum_Respone to_BaiHat_ForAlbum_Respone(BaiHat baiHat);
 }
