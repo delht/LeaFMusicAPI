@@ -25,5 +25,6 @@ public class BaiHat_GetRespone {
     private String album;
     private String khuVucNhac;
     private String urlHinh;
+    private String urlFile;
     private LocalDateTime ngayPhatHanh;
 }

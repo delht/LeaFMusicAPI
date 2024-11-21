@@ -12,11 +12,13 @@ import online.delht.leafmusicapi.dto.reponse.CaSi_Respone.CaSi_GetRespone;
 import online.delht.leafmusicapi.dto.reponse.KhuVuc_Respone.KhuVuc_Respone;
 import online.delht.leafmusicapi.dto.reponse.TheLoai_Respone.TheLoai_Respone;
 
+import java.time.LocalDateTime;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-@JsonInclude(JsonInclude.Include.NON_NULL)
+//@JsonInclude(JsonInclude.Include.NON_NULL)
 public class BaiHat_ChiTiet_GetRespone {
 
     private String tenBaiHat;
@@ -26,4 +28,8 @@ public class BaiHat_ChiTiet_GetRespone {
     private TheLoai_Respone theLoai;
     private Album_Respone album;
     private KhuVuc_Respone khuVuc;
+
+    private String urlHinh;
+    private String urlFile;
+    private LocalDateTime ngayPhatHanh;
 }

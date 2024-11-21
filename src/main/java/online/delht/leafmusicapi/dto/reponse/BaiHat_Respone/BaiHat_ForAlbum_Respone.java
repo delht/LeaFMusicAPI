@@ -17,5 +17,6 @@ public class BaiHat_ForAlbum_Respone {
     private String theLoai;
     private String khuVucNhac;
     private String urlHinh;
+    private String urlFile;
     private LocalDateTime ngayPhatHanh;
 }

@@ -19,5 +19,6 @@ public class BaiHat_ForKhuVuc_Respone {
     private String theLoai;
     private String album;
     private String urlHinh;
+    private String urlFile;
     private LocalDateTime ngayPhatHanh;
 }
