@@ -17,11 +17,11 @@ import java.io.IOException;
 @RequiredArgsConstructor
 public class UploadFileController {
 
-    private final UploadFile2 uploadFile;
+    private final UploadFile uploadFile;
 
     @PostMapping("/file")
     public String uploadFile(@RequestParam("file")MultipartFile file) throws IOException {
-        String urlFile = uploadFile.uploadFile(file);
+        String urlFile= uploadFile.uploadFile(file);
         return urlFile;
     }
 

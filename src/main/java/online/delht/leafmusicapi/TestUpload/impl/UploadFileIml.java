@@ -34,10 +34,14 @@ public class UploadFileIml implements UploadFile {
         File fileUpload = convert(file);
         log.info("fileupload is: {}", fileUpload);
 
-        cloudinary.uploader().upload(fileUpload, ObjectUtils.asMap("public_id", publicValue));
+
+
+        cloudinary.uploader().upload(fileUpload, ObjectUtils.asMap("public_id", publicValue, "resource_type", "raw"));
         cleanDisk(fileUpload);
 
-        String filePath = cloudinary.url().generate(StringUtils.join(publicValue, "." , extension));
+        String filePath = cloudinary.url().resourceType("raw").generate(StringUtils.join(publicValue, ".", extension));
+        log.info("Uploaded file URL: {}", filePath);
+
 
         return filePath;
     }
@@ -45,7 +49,9 @@ public class UploadFileIml implements UploadFile {
 
     private File convert(MultipartFile file) throws IOException {
         assert file.getOriginalFilename() != null;
-        File convFile = new File(StringUtils.join(generatePublicValue(file.getOriginalFilename()), getFileName(file.getOriginalFilename())[1]));
+        File convFile = new File(StringUtils.join(generatePublicValue(file.getOriginalFilename()), ".", getFileName(file.getOriginalFilename())[1]));
+
+
         try(InputStream is = file.getInputStream()) {
             Files.copy(is, convFile.toPath());
         }
