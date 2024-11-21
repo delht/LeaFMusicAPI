@@ -73,6 +73,18 @@
 			<version>1.5.5.Final</version>
 		</dependency>
 
+		<!--	Cloudinary	=============================================-->
+		<dependency>
+			<groupId>com.cloudinary</groupId>
+			<artifactId>cloudinary-http44</artifactId>
+			<version>1.39.0</version>
+		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.apache.httpcomponents.client5</groupId>-->
+<!--			<artifactId>httpclient5</artifactId>-->
+<!--			<version>5.2</version>-->
+<!--		</dependency>-->
+
 	</dependencies>
 
 	<build>
