@@ -40,6 +40,9 @@ public class BaiHat {
     @Column(name = "url_hinh", length = 255)
     private String urlHinh;
 
+    @Column(name = "url_file", length = 255)
+    private String urlFile;
+
     @Column(name = "ngay_phathanh", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime ngayPhatHanh;
 

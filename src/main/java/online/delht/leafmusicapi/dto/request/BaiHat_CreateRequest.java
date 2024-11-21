@@ -19,7 +19,10 @@ public class BaiHat_CreateRequest {
     private String tenBaiHat;
     private CaSi caSi;
     private TheLoai theLoai;
+    private Album album;
     private KhuVucNhac khuVucNhac;
     private String urlHinh;
+    private String urlFile;
     private LocalDateTime ngayPhatHanh;
+
 }

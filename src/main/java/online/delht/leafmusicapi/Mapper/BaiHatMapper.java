@@ -14,6 +14,7 @@ import java.util.List;
 public interface BaiHatMapper {
     BaiHat toBaiHat(BaiHat_CreateRequest request); //Lay gia tri truyen vao
 
+
     @Mappings({
             @Mapping(source = "caSi.idCaSi", target = "caSi.idCaSi"),
             @Mapping(source = "theLoai.idTheLoai", target = "theLoai.idTheLoai"),
