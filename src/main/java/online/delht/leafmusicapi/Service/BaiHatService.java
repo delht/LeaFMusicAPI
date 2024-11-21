@@ -29,6 +29,17 @@ public class BaiHatService {
         return baiHatRepository.save(baiHat);
     }
 
+    public BaiHat createBaiHat2(BaiHat_CreateRequest request) {
+        // Chuyển đổi từ DTO sang Entity
+        BaiHat baiHat = baiHatMapper.toBaiHat(request);
+
+        return baiHatRepository.save(baiHat);
+    }
+
+
+
+//    ========================================================================
+
     public BaiHat_ChiTiet_GetRespone getBaiHatById(String id) {
         BaiHat baiHat = baiHatRepository.findById(id)
                 .orElseThrow(()-> new RuntimeException("Khong tim thay bai hat theo id nay"));
