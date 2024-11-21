@@ -24,7 +24,7 @@ public class UploadFileIml implements UploadFile {
     private final Cloudinary cloudinary;
 
     @Override
-    public String uploadFile(MultipartFile file) throws IOException {
+    public String uploadFile(MultipartFile file, String foldername) throws IOException {
         assert file.getOriginalFilename() != null;
 
         String publicValue = generatePublicValue(file.getOriginalFilename());
@@ -32,10 +32,11 @@ public class UploadFileIml implements UploadFile {
         String extension = getFileName(file.getOriginalFilename())[1];
         log.info("extension is: {}", extension);
 
-        String folder = "Home/LeaFMusic/";
+//        String folder = "Home/LeaFMusic/";
 
         // Cập nhật public_id với thư mục
-        String filePublicId = folder + publicValue;
+//        String filePublicId = folder + publicValue;
+        String filePublicId = foldername + publicValue;
 
         File fileUpload = convert(file);
         log.info("fileupload is: {}", fileUpload);

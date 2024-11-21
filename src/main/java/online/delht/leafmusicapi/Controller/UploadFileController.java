@@ -21,7 +21,8 @@ public class UploadFileController {
 
     @PostMapping("/file")
     public String uploadFile(@RequestParam("file")MultipartFile file) throws IOException {
-        String urlFile= uploadFile.uploadFile(file);
+        String foldername = "LeaFMusic/";
+        String urlFile= uploadFile.uploadFile(file, foldername);
         return urlFile;
     }
 
