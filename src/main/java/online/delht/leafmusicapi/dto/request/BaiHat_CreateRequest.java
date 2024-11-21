@@ -16,13 +16,22 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class BaiHat_CreateRequest {
 
+//    private String tenBaiHat;
+//    private CaSi caSi;
+//    private TheLoai theLoai;
+//    private Album album;
+//    private KhuVucNhac khuVucNhac;
+//    private String urlHinh;
+//    private String urlFile;
+//    private LocalDateTime ngayPhatHanh;
+
     private String tenBaiHat;
-    private CaSi caSi;
-    private TheLoai theLoai;
-    private Album album;
-    private KhuVucNhac khuVucNhac;
+    private String caSi;
+    private String theLoai;
+    private String album;
+    private String khuVucNhac;
     private String urlHinh;
     private String urlFile;
-    private LocalDateTime ngayPhatHanh;
+    private String ngayPhatHanh;
 
 }

@@ -12,6 +12,16 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface BaiHatMapper {
+
+    @Mappings({
+            @Mapping(target = "caSi.idCaSi", source = "caSi"),
+            @Mapping(target = "theLoai.idTheLoai", source = "theLoai"),
+            @Mapping(target = "album.idAlbum", source = "album"),
+            @Mapping(target = "khuVucNhac.idKhuVuc", source = "khuVucNhac"),
+            @Mapping(target = "urlHinh", source = "urlHinh"),
+            @Mapping(target = "urlFile", source = "urlFile"),
+            @Mapping(target = "ngayPhatHanh", expression = "java(java.time.LocalDateTime.parse(request.getNgayPhatHanh()))")
+    })
     BaiHat toBaiHat(BaiHat_CreateRequest request); //Lay gia tri truyen vao
 
 
