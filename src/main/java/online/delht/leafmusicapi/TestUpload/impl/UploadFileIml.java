@@ -31,15 +31,21 @@ public class UploadFileIml implements UploadFile {
         log.info("publicValue is: {}", publicValue);
         String extension = getFileName(file.getOriginalFilename())[1];
         log.info("extension is: {}", extension);
+
+        String folder = "Home/LeaFMusic/";
+
+        // Cập nhật public_id với thư mục
+        String filePublicId = folder + publicValue;
+
         File fileUpload = convert(file);
         log.info("fileupload is: {}", fileUpload);
 
 
 
-        cloudinary.uploader().upload(fileUpload, ObjectUtils.asMap("public_id", publicValue, "resource_type", "raw"));
+        cloudinary.uploader().upload(fileUpload, ObjectUtils.asMap("public_id", filePublicId, "resource_type", "raw"));
         cleanDisk(fileUpload);
 
-        String filePath = cloudinary.url().resourceType("raw").generate(StringUtils.join(publicValue, ".", extension));
+        String filePath = cloudinary.url().resourceType("raw").generate(StringUtils.join(filePublicId, ".", extension));
         log.info("Uploaded file URL: {}", filePath);
 
 
