@@ -10,7 +10,7 @@ import online.delht.leafmusicapi.dto.reponse.KhuVuc_Respone.KhuVuc_BaiHat_Respon
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor //bo autowired
+@RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class KhuVucService {
     KhuVucRepository khuVucRepository;

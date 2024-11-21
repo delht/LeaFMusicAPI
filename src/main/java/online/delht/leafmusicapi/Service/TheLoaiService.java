@@ -10,7 +10,7 @@ import online.delht.leafmusicapi.dto.reponse.TheLoai_Respone.TheLoai_BaiHat_Resp
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor //bo autowired
+@RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class TheLoaiService {
     TheLoaiRepository theLoaiRepository;

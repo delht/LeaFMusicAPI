@@ -32,8 +32,6 @@ public class Album {
     @Column(name = "ngay_phathanh", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
     private LocalDateTime ngayPhatHanh;
 
-//====================
-
     @OneToMany(mappedBy = "album")
     private List<BaiHat> baiHats;
 

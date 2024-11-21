@@ -26,11 +26,6 @@ public interface CaSiMapper {
     CaSi_BaiHat_GetRespone to_CaSi_BaiHat_GetRespone(CaSi caSi);
 
     // Ánh xạ từ BaiHat sang BaiHat_GetRespone
-//    @Mapping(target = "caSi", source = "caSi", qualifiedByName = "mapCaSiToString")
-//    @Mapping(target = "theLoai", source = "theLoai", qualifiedByName = "mapTheLoaiToString")
-//    @Mapping(target = "album", source = "album", qualifiedByName = "mapAlbumToString")
-//    @Mapping(target = "khuVucNhac", source = "khuVucNhac", qualifiedByName = "mapKhuVucNhacToString")
-//    BaiHat_GetRespone to_BaiHat_GetRespone(BaiHat baiHat);
 
     @Mapping(target = "caSi", expression = "java(baiHat.getCaSi() != null ? baiHat.getCaSi().getTenCaSi() : null)")
     @Mapping(target = "theLoai", expression = "java(baiHat.getTheLoai() != null ? baiHat.getTheLoai().getTenTheLoai() : null)")

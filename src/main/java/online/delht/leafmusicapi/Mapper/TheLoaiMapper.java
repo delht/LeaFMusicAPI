@@ -14,7 +14,7 @@ import java.util.List;
 @Mapper(componentModel = "spring")
 public interface TheLoaiMapper {
 
-    @Mapping(source = "baiHats", target = "baiHats") // Map toàn bộ danh sách baiHats
+    @Mapping(source = "baiHats", target = "baiHats")
     TheLoai_BaiHat_Respone to_TheLoai_BaiHat_Respone(TheLoai theLoai);
 
     @Mappings({

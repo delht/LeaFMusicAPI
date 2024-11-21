@@ -11,6 +11,8 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ItemYeuThichId implements Serializable {
+
     private Integer dsYeuThich;
+
     private Integer baiHat;
 }

@@ -11,7 +11,7 @@ import online.delht.leafmusicapi.dto.reponse.CaSi_Respone.CaSi_BaiHat_GetRespone
 import org.springframework.stereotype.Service;
 
 @Service
-@RequiredArgsConstructor //bo autowired
+@RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true)
 public class CaSiService {
 

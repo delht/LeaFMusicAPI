@@ -18,9 +18,9 @@ import java.util.List;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true) //bo private
 public class BaiHatService {
 //    @Autowired
-    private BaiHatRepository baiHatRepository;
+    BaiHatRepository baiHatRepository;
 //    @Autowired
-    private BaiHatMapper baiHatMapper;
+    BaiHatMapper baiHatMapper;
 
     public BaiHat createBaiHat(BaiHat_CreateRequest request) {
         if(baiHatRepository.existsBaiHatByTenBaiHat(request.getTenBaiHat()))

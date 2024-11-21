@@ -13,15 +13,10 @@ import java.util.Optional;
 public interface CaSiRepository extends JpaRepository<CaSi, String> {
 
     //Album
-    /*@Query("SELECT c FROM CaSi c LEFT JOIN FETCH c.albums WHERE c.idCaSi = :id")
-    Optional<CaSi> findByIdWithAlbums(@Param("id") String id);*/
-    //  @EntityGraph(attributePaths = {"albums"})
-    //  Optional<CaSi> findById_Album(@Param("id") String id);
     @EntityGraph(attributePaths = {"albums"})
     Optional<CaSi> findTenCaSiWithAlbumsByTenCaSi(@Param("name") String tenCaSi);
 
     //BaiHat
-    //@EntityGraph(attributePaths = {"baiHats.theLoai", "baiHats.album", "baiHats.khuVucNhac"})
     @EntityGraph(attributePaths = {"baiHats"})
     Optional<CaSi> findTenCaSiWithBaiHatsByTenCaSi(@Param("name") String tenCaSi);
 }
