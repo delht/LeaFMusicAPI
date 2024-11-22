@@ -55,7 +55,7 @@ public class BaiHatController {
     BaiHatRepository baiHatRepository;
 
     @PostMapping("/upload")
-    public ResponseEntity<?> uploadBaiHat(@RequestParam("file") MultipartFile file, @RequestParam("request") String requestJson) {
+    public ResponseEntity<?> uploadBaiHat(@RequestParam("file") MultipartFile file, @RequestParam("img") MultipartFile img, @RequestParam("request") String requestJson) {
         try {
             // chuyen JSON thanh obj BaiHat_CreateRequest
             ObjectMapper objectMapper = new ObjectMapper();
@@ -66,10 +66,14 @@ public class BaiHatController {
                 throw new RuntimeException("Tên bài hát đã tồn tại: " + request.getTenBaiHat());
             }
 
-            String foldername = "LeaFMusic/Mp3File/";
-            String fileUrl = uploadFile.uploadFile(file, foldername);
+            String folderMp3 = "LeaFMusic/Mp3File/";
+            String fileUrl = uploadFile.uploadFile(file, folderMp3);
+
+            String folderImg = "LeaFMusic/Images/BaiHat/";
+            String fileUrlImg = uploadFile.uploadFile(img, folderImg);
 
             request.setUrlFile(fileUrl);
+            request.setUrlHinh(fileUrlImg);
 
             BaiHat baiHat = baiHatService.createBaiHat2(request);
 

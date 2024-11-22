@@ -65,18 +65,20 @@ public class BaiHatService {
         BaiHat baiHat = baiHatRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("ko tim thay baihat vs id: " + id));
 
+        //xoa file mp3
+        String folderMp3 = "LeaFMusic/Mp3File/";
+        String fileUrlMp3 = baiHat.getUrlFile();
+        String publicIdMp3 = layPublicIdTuURL(fileUrlMp3, folderMp3);
+        log.info("Url file can xoa {}", fileUrlMp3);
+        deleteFile.deleteFile(publicIdMp3);
 
+        //xoa file img
+        String folderImg = "LeaFMusic/Images/BaiHat/";
+        String fileUrlImg = baiHat.getUrlHinh();
+        String publicIdImg = layPublicIdTuURL(fileUrlImg, folderImg);
+        log.info("Url file can xoa {}", fileUrlImg);
+        deleteFile.deleteFile(publicIdImg);
 
-        String fileUrl = baiHat.getUrlFile();
-        String publicId = layPublicIdTuURL(fileUrl);
-
-//        String test = "LeaFMusic/Mp3File/"+publicId+".mp3";
-
-        log.info("Url file can xoa {}", fileUrl);
-
-
-        deleteFile.deleteFile(publicId);
-//        deleteFile.deleteFile(test);
 
         baiHatRepository.deleteById(id);
         log.info("Baihat vs ID {} xoa thanh cong.", id);
@@ -88,8 +90,8 @@ public class BaiHatService {
 //        return fileUrl.substring(start, end);
 //    }
 
-    private String layPublicIdTuURL(String fileUrl) {
-        int start = fileUrl.indexOf("LeaFMusic/Mp3File/");
+    private String layPublicIdTuURL(String fileUrl, String folder) {
+        int start = fileUrl.indexOf(folder);
         return fileUrl.substring(start);
     }
 
