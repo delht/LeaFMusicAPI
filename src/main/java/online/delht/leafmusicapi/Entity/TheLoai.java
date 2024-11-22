@@ -24,4 +24,5 @@ public class TheLoai {
 
     @OneToMany(mappedBy = "theLoai")
     private List<BaiHat> baiHats;
+
 }

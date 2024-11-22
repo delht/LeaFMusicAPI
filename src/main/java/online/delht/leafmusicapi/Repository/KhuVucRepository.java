@@ -11,5 +11,7 @@ import java.util.Optional;
 @Repository
 public interface KhuVucRepository extends JpaRepository<KhuVucNhac, String> {
     @EntityGraph(attributePaths = {"baiHats"})
-    Optional<KhuVucNhac> findById(@Param("id") String id);
+    Optional<KhuVucNhac> findById(String id);
+
+
 }

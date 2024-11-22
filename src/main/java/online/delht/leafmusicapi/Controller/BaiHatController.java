@@ -55,27 +55,30 @@ public class BaiHatController {
     BaiHatRepository baiHatRepository;
 
     @PostMapping("/upload")
-    public ResponseEntity<?> uploadBaiHat(@RequestParam("file") MultipartFile file, @RequestParam("img") MultipartFile img, @RequestParam("request") String requestJson) {
+    public ResponseEntity<?> uploadBaiHat(
+            @RequestParam("file") MultipartFile file,
+            @RequestParam("img") MultipartFile img,
+            @RequestParam("request") String requestJson) {
         try {
             // chuyen JSON thanh obj BaiHat_CreateRequest
             ObjectMapper objectMapper = new ObjectMapper();
             BaiHat_CreateRequest request = objectMapper.readValue(requestJson, BaiHat_CreateRequest.class);
 
 
-            if (baiHatRepository.existsBaiHatByTenBaiHat(request.getTenBaiHat())) {
-                throw new RuntimeException("Tên bài hát đã tồn tại: " + request.getTenBaiHat());
-            }
+//            if (baiHatRepository.existsBaiHatByTenBaiHat(request.getTenBaiHat())) {
+//                throw new RuntimeException("Tên bài hát đã tồn tại: " + request.getTenBaiHat());
+//            }
+//
+//            String folderMp3 = "LeaFMusic/Mp3File/";
+//            String fileUrl = uploadFile.uploadFile(file, folderMp3);
+//
+//            String folderImg = "LeaFMusic/Images/BaiHat/";
+//            String fileUrlImg = uploadFile.uploadFile(img, folderImg);
+//
+//            request.setUrlFile(fileUrl);
+//            request.setUrlHinh(fileUrlImg);
 
-            String folderMp3 = "LeaFMusic/Mp3File/";
-            String fileUrl = uploadFile.uploadFile(file, folderMp3);
-
-            String folderImg = "LeaFMusic/Images/BaiHat/";
-            String fileUrlImg = uploadFile.uploadFile(img, folderImg);
-
-            request.setUrlFile(fileUrl);
-            request.setUrlHinh(fileUrlImg);
-
-            BaiHat baiHat = baiHatService.createBaiHat2(request);
+            BaiHat baiHat = baiHatService.createBaiHat2(file, img, request);
 
             return ResponseEntity.ok(baiHat);
 
@@ -99,6 +102,27 @@ public class BaiHatController {
         } catch (RuntimeException | IOException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
+    }
+
+//    ===========================================================
+
+    @PutMapping("/update/id={id}")
+    public ResponseEntity<?> updateBaiHat(
+            @PathVariable String id,
+            @RequestParam("file") MultipartFile file,
+            @RequestParam("img") MultipartFile img,
+            @RequestParam("request") String requestJson) {
+        try{
+            ObjectMapper objectMapper = new ObjectMapper();
+            BaiHat_CreateRequest request = objectMapper.readValue(requestJson, BaiHat_CreateRequest.class);
+
+            BaiHat baiHat = baiHatService.updateBaiHat(id, file, img, request);
+
+            return ResponseEntity.ok(baiHat);
+        }catch (RuntimeException | IOException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+
     }
 
 

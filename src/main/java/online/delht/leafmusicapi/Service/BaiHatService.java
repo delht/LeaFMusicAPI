@@ -6,15 +6,18 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
 import online.delht.leafmusicapi.Cloudinary.DeleteFile;
-import online.delht.leafmusicapi.Entity.BaiHat;
+import online.delht.leafmusicapi.Cloudinary.UploadFile;
+import online.delht.leafmusicapi.Entity.*;
 import online.delht.leafmusicapi.Mapper.BaiHatMapper;
-import online.delht.leafmusicapi.Repository.BaiHatRepository;
+import online.delht.leafmusicapi.Repository.*;
 import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_ChiTiet_GetRespone;
 import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_GetRespone;
 import online.delht.leafmusicapi.dto.request.BaiHat_CreateRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -48,7 +51,23 @@ public class BaiHatService {
         return baiHatRepository.save(baiHat);
     }
 
-    public BaiHat createBaiHat2(BaiHat_CreateRequest request) {
+    public BaiHat createBaiHat2(MultipartFile file, MultipartFile img, BaiHat_CreateRequest request) throws IOException {
+
+
+        if (baiHatRepository.existsBaiHatByTenBaiHat(request.getTenBaiHat())) {
+            throw new RuntimeException("Tên bài hát đã tồn tại: " + request.getTenBaiHat());
+        }
+
+        String folderMp3 = "LeaFMusic/Mp3File/";
+        String fileUrl = uploadFile.uploadFile(file, folderMp3);
+
+        String folderImg = "LeaFMusic/Images/BaiHat/";
+        String fileUrlImg = uploadFile.uploadFile(img, folderImg);
+
+        request.setUrlFile(fileUrl);
+        request.setUrlHinh(fileUrlImg);
+
+
         // Chuyển đổi từ DTO sang Entity
         BaiHat baiHat = baiHatMapper.toBaiHat(request);
 
@@ -58,6 +77,7 @@ public class BaiHatService {
     //    ========================================================================
 
     DeleteFile deleteFile;
+    UploadFile uploadFile;
 
     @Transactional
     public void deleteBaiHat(String id) throws IOException {
@@ -96,5 +116,100 @@ public class BaiHatService {
     }
 
     //    ========================================================================
+    AlbumRepository albumRepository;
+    CaSiRepository caSiRepository;
+    KhuVucRepository khuVucRepository;
+    TheLoaiRepository theLoaiRepository;
+
+    public BaiHat updateBaiHat(String id, MultipartFile file, MultipartFile img, BaiHat_CreateRequest request) throws IOException {
+
+
+        BaiHat baiHatCu=baiHatRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy bài hát với ID: " + id));
+
+        String oldImgUrl=baiHatCu.getUrlHinh();
+        String oldFileUrl=baiHatCu.getUrlFile();
+
+        log.info("Url file can xoa {}", oldImgUrl);
+        log.info("Url file can xoa {}", oldFileUrl);
+
+
+        baiHatCu = baiHatMapper.toBaiHat(request);
+//        baiHatCu = baiHatMapper.toBaiHat2(request);
+        baiHatCu.setIdBaiHat(Integer.valueOf(id));
+
+        Integer testid = baiHatCu.getIdBaiHat();
+        log.info("id: ", testid);
+
+
+
+
+
+
+//
+//        // Tìm Album mới từ cơ sở dữ liệu và gán
+//        if (request.getAlbum() != null) {
+//            Album album = albumRepository.findById(String.valueOf(Integer.parseInt(request.getAlbum())))
+//                    .orElseThrow(() -> new RuntimeException("Không tìm thấy Album với ID: " + request.getAlbum()));
+//            baiHat.setAlbum(album);
+//        }
+//
+//        // Tương tự với các thực thể khác
+//        if (request.getCaSi() != null) {
+//            CaSi caSi = caSiRepository.findById(String.valueOf(Integer.parseInt(request.getCaSi())))
+//                    .orElseThrow(() -> new RuntimeException("Không tìm thấy CaSi với ID: " + request.getCaSi()));
+//            baiHat.setCaSi(caSi);
+//        }
+//
+//        if (request.getTheLoai() != null) {
+//            TheLoai theLoai = theLoaiRepository.findById(String.valueOf(Integer.parseInt(request.getTheLoai())))
+//                    .orElseThrow(() -> new RuntimeException("Không tìm thấy TheLoai với ID: " + request.getTheLoai()));
+//            baiHat.setTheLoai(theLoai);
+//        }
+//
+//        if (request.getKhuVucNhac() != null) {
+//            KhuVucNhac khuVucNhac = khuVucRepository.findById(request.getKhuVucNhac())
+//                    .orElseThrow(() -> new RuntimeException("Không tìm thấy KhuVucNhac với ID: " + request.getKhuVucNhac()));
+//            baiHat.setKhuVucNhac(khuVucNhac);
+//        }
+//
+//        baiHat.setNgayPhatHanh(LocalDateTime.parse(request.getNgayPhatHanh()));
+
+//        ====================================================
+
+        //mp3
+
+
+        if (file != null && !file.isEmpty()) {
+            String folderMp3 = "LeaFMusic/Mp3File/";
+
+            // Xóa file cũ trên Cloudinary
+//            String oldFileUrl = baiHat.getUrlFile();
+
+            log.info("Url file can xoa {}", oldFileUrl);
+
+            String oldPublicId = layPublicIdTuURL(oldFileUrl, folderMp3);
+            deleteFile.deleteFile(oldPublicId);
+
+            String newFileUrl = uploadFile.uploadFile(file, folderMp3);
+            baiHatCu.setUrlFile(newFileUrl);
+        }
+        //img
+        if (img != null && !img.isEmpty()) {
+            String folderImg = "LeaFMusic/Images/BaiHat/";
+
+//            String oldImgUrl = baiHat.getUrlHinh();
+            String oldImgPublicId = layPublicIdTuURL(oldImgUrl, folderImg);
+            deleteFile.deleteFile(oldImgPublicId);
+
+            String newImgUrl = uploadFile.uploadFile(img, folderImg);
+            baiHatCu.setUrlHinh(newImgUrl);
+        }
+
+        return baiHatRepository.save(baiHatCu);
+//        return null;
+    }
+
+
 
 }

@@ -23,6 +23,7 @@ public class KhuVucNhac {
 
     @OneToMany(mappedBy = "khuVucNhac")
     private List<BaiHat> baiHats;
+
 }
 
 

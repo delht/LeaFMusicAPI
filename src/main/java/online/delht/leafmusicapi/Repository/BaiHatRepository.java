@@ -10,4 +10,5 @@ import java.util.Optional;
 public interface BaiHatRepository extends JpaRepository<BaiHat, String> {
     boolean existsBaiHatByTenBaiHat(String tenBaiHat);
     Optional<BaiHat> findByTenBaiHat(String tenBaiHat);
+
 }
