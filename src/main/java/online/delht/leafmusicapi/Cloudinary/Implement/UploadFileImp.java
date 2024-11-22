@@ -1,10 +1,10 @@
-package online.delht.leafmusicapi.TestUpload.impl;
+package online.delht.leafmusicapi.Cloudinary.Implement;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.utils.ObjectUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import online.delht.leafmusicapi.TestUpload.UploadFile;
+import online.delht.leafmusicapi.Cloudinary.UploadFile;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,7 +19,7 @@ import java.util.UUID;
 @Service
 @RequiredArgsConstructor
 @Slf4j
-public class UploadFileIml implements UploadFile {
+public class UploadFileImp implements UploadFile {
 
     private final Cloudinary cloudinary;
 
@@ -34,19 +34,20 @@ public class UploadFileIml implements UploadFile {
 
 //        String folder = "Home/LeaFMusic/";
 
-        // Cập nhật public_id với thư mục
 //        String filePublicId = folder + publicValue;
-        String filePublicId = foldername + publicValue;
+//        String filePublicId = foldername + publicValue;
+        String filePublicId =  publicValue;
 
         File fileUpload = convert(file);
         log.info("fileupload is: {}", fileUpload);
 
 
 
-        cloudinary.uploader().upload(fileUpload, ObjectUtils.asMap("public_id", filePublicId, "resource_type", "raw"));
+//        cloudinary.uploader().upload(fileUpload, ObjectUtils.asMap("public_id", filePublicId, "resource_type", "raw"));
+        cloudinary.uploader().upload(fileUpload, ObjectUtils.asMap("public_id", filePublicId, "folder", foldername , "resource_type", "raw"));
         cleanDisk(fileUpload);
 
-        String filePath = cloudinary.url().resourceType("raw").generate(StringUtils.join(filePublicId, ".", extension));
+        String filePath = cloudinary.url().resourceType("raw").generate(StringUtils.join( foldername,filePublicId, ".", extension));
         log.info("Uploaded file URL: {}", filePath);
 
 

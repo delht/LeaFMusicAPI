@@ -1,4 +1,4 @@
-package online.delht.leafmusicapi.TestUpload;
+package online.delht.leafmusicapi.Test;
 
 import org.springframework.web.multipart.MultipartFile;
 

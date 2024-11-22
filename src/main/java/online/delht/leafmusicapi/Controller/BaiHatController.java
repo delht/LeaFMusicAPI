@@ -3,7 +3,7 @@ package online.delht.leafmusicapi.Controller;
 import online.delht.leafmusicapi.Entity.BaiHat;
 import online.delht.leafmusicapi.Repository.BaiHatRepository;
 import online.delht.leafmusicapi.Service.BaiHatService;
-import online.delht.leafmusicapi.TestUpload.UploadFile;
+import online.delht.leafmusicapi.Cloudinary.UploadFile;
 import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_ChiTiet_GetRespone;
 import online.delht.leafmusicapi.dto.request.BaiHat_CreateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +17,7 @@ import java.io.IOException;
 @RestController
 @RequestMapping("/baihat")
 public class BaiHatController {
+
     @Autowired
     private BaiHatService baiHatService;
 
@@ -35,6 +36,7 @@ public class BaiHatController {
         }
         return ResponseEntity.ok(baihat);
     }
+
     @GetMapping("/get/name={name}")
     ResponseEntity<BaiHat_ChiTiet_GetRespone> getBaiHatByName(@PathVariable String name) {
         BaiHat_ChiTiet_GetRespone baihat = baiHatService.getBaiHatByTenBaiHat(name);
@@ -53,10 +55,7 @@ public class BaiHatController {
     BaiHatRepository baiHatRepository;
 
     @PostMapping("/upload")
-    public ResponseEntity<?> uploadBaiHat(
-            @RequestParam("file") MultipartFile file,
-            @RequestParam("request") String requestJson
-    ) {
+    public ResponseEntity<?> uploadBaiHat(@RequestParam("file") MultipartFile file, @RequestParam("request") String requestJson) {
         try {
             // chuyen JSON thanh obj BaiHat_CreateRequest
             ObjectMapper objectMapper = new ObjectMapper();
@@ -67,7 +66,7 @@ public class BaiHatController {
                 throw new RuntimeException("Tên bài hát đã tồn tại: " + request.getTenBaiHat());
             }
 
-            String foldername = "LeaFMusic/";
+            String foldername = "LeaFMusic/Mp3File/";
             String fileUrl = uploadFile.uploadFile(file, foldername);
 
             request.setUrlFile(fileUrl);
@@ -80,10 +79,23 @@ public class BaiHatController {
             return ResponseEntity.badRequest().body(e.getMessage());
 //        } catch (Exception e) {
 //            e.printStackTrace();
-//            return ResponseEntity.status(500).body("Đã xảy ra lỗi không mong muốn!");
+//            return ResponseEntity.status(500).body("Co loi xay ra!");
         }
     }
 
+//    ===========================================================
+
+
+    @DeleteMapping("/delete/id={id}")
+//    public ResponseEntity<?> deleteBaiHat(@RequestParam("id") String id) {
+    public ResponseEntity<?> deleteBaiHat(@PathVariable String id) {
+        try {
+            baiHatService.deleteBaiHat(id);
+            return ResponseEntity.ok("Baihat va file da dc xoa.");
+        } catch (RuntimeException | IOException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 
 
 

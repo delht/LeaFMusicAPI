@@ -21,8 +21,10 @@ public interface AlbumMapper {
 //    @Mapping(source="baiHats.idBaiHat", target = "baiHats")
 //    Album_BaiHat_Respone to_Album_BaiHat_Respone(Album album);
 
-    @Mapping(source = "caSi.tenCaSi", target = "tenCaSi")
-    @Mapping(source = "baiHats", target = "baiHats")
+    @Mappings({
+            @Mapping(source = "caSi.tenCaSi", target = "tenCaSi"),
+            @Mapping(source = "baiHats", target = "baiHats")
+    })
     Album_BaiHat_Respone to_Album_BaiHat_Respone(Album album);
 
     // Ánh xạ từng BaiHat sang BaiHat_ForAlbum_Respone

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/album")
 public class AlbumController {
     AlbumService albumService;
-
+    //endpointt
     @GetMapping("/get/id={id}")
     ResponseEntity<Album_BaiHat_Respone> getAlbumId(@PathVariable String id) {
         Album_BaiHat_Respone album = albumService.getAlbumBaiHat(id);

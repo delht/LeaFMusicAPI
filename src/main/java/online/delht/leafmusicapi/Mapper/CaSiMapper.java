@@ -26,11 +26,13 @@ public interface CaSiMapper {
     CaSi_BaiHat_GetRespone to_CaSi_BaiHat_GetRespone(CaSi caSi);
 
     // Ánh xạ từ BaiHat sang BaiHat_GetRespone
-
-    @Mapping(target = "caSi", expression = "java(baiHat.getCaSi() != null ? baiHat.getCaSi().getTenCaSi() : null)")
-    @Mapping(target = "theLoai", expression = "java(baiHat.getTheLoai() != null ? baiHat.getTheLoai().getTenTheLoai() : null)")
-    @Mapping(target = "album", expression = "java(baiHat.getAlbum() != null ? baiHat.getAlbum().getTenAlbum() : null)")
-    @Mapping(target = "khuVucNhac", expression = "java(baiHat.getKhuVucNhac() != null ? baiHat.getKhuVucNhac().getTenKhuVuc() : null)")
+    @Mappings({
+//            @Mapping(target = "caSi", expression = "java(baiHat.getCaSi() != null ? baiHat.getCaSi().getTenCaSi() : null)"),
+            @Mapping(target = "caSi", source = "caSi.tenCaSi"),
+            @Mapping(target = "theLoai", expression = "java(baiHat.getTheLoai() != null ? baiHat.getTheLoai().getTenTheLoai() : null)"),
+            @Mapping(target = "album", expression = "java(baiHat.getAlbum() != null ? baiHat.getAlbum().getTenAlbum() : null)"),
+            @Mapping(target = "khuVucNhac", expression = "java(baiHat.getKhuVucNhac() != null ? baiHat.getKhuVucNhac().getTenKhuVuc() : null)")
+    })
     BaiHat_GetRespone to_BaiHat_GetRespone(BaiHat baiHat);
 
     // Ánh xạ danh sách bài hát

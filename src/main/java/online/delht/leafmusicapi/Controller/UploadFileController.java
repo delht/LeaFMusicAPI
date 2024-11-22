@@ -1,9 +1,7 @@
 package online.delht.leafmusicapi.Controller;
 
 import lombok.RequiredArgsConstructor;
-import online.delht.leafmusicapi.TestUpload.UploadFile;
-import online.delht.leafmusicapi.TestUpload.UploadFile2;
-import org.springframework.stereotype.Controller;
+import online.delht.leafmusicapi.Cloudinary.UploadFile;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,7 +19,7 @@ public class UploadFileController {
 
     @PostMapping("/file")
     public String uploadFile(@RequestParam("file")MultipartFile file) throws IOException {
-        String foldername = "LeaFMusic/";
+        String foldername = "Home/LeaFMusic/";
         String urlFile= uploadFile.uploadFile(file, foldername);
         return urlFile;
     }
