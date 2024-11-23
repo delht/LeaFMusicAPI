@@ -143,9 +143,6 @@ public class BaiHatService {
 
 
 
-
-
-
 //
 //        // Tìm Album mới từ cơ sở dữ liệu và gán
 //        if (request.getAlbum() != null) {

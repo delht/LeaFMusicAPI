@@ -27,6 +27,6 @@ public class TaiKhoan {
     private VaiTro vaiTro;
 
     public enum VaiTro {
-        USER, ADMIN
+        user, admin
     }
 }
