@@ -17,10 +17,11 @@ public class DsYeuThich {
     private Integer idYeuThich;
 
     @ManyToOne
-    @JoinColumn(name = "id_taikhoan", nullable = false, foreignKey = @ForeignKey(name = "fk_ds_yeuthich_taikhoan"))
+    @JoinColumn(name = "id_taikhoan", nullable = false)
     private TaiKhoan taiKhoan;
 
-    @Column(name = "ten_danhsach", nullable = false)
-    private String tenDanhSach;
+    @ManyToOne
+    @JoinColumn(name = "id_baihat", nullable = false)
+    private BaiHat baiHat;
 
 }

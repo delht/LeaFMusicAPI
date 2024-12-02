@@ -8,6 +8,6 @@ import org.mapstruct.Mapping;
 @Mapper(componentModel = "spring")
 public interface DsYeuThichMapper {
 
-    @Mapping(target = "taiKhoan", source = "idTaiKhoan")
+//    @Mapping(target = "taiKhoan", source = "idTaiKhoan")
     DsYeuThich dsYeuThich(TaiKhoan_Create_Request tk);
 }

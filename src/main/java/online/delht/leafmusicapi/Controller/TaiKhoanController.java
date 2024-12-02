@@ -20,21 +20,21 @@ public class TaiKhoanController {
     private TaiKhoanService taiKhoanService;
 
 
-//    @PostMapping("/tao")
-//    public ResponseEntity<?> taoTaiKhoan(@RequestBody TaiKhoan_Create_Request request) {
-//        try {
-//            TaiKhoan taiKhoan = taiKhoanService.taoTaiKhoan(request.getUsername(), request.getPassword());
-//            return ResponseEntity.ok("Tài khoản được tạo thành công với ID: " + taiKhoan.getIdTaiKhoan());
-//        } catch (RuntimeException e) {
-//            return ResponseEntity.badRequest().body(e.getMessage());
-//        }
-//    }
-
     @PostMapping("/tao")
-    public ResponseEntity<?> taoTaiKhoan(@RequestBody TaiKhoan_Create_Request taiKhoan) {
-        TaiKhoan tk = taiKhoanService.createTaiKhoan(taiKhoan);
-        return new ResponseEntity<>(tk, HttpStatus.OK);
+    public ResponseEntity<?> taoTaiKhoan(@RequestBody TaiKhoan_Create_Request request) {
+        try {
+            TaiKhoan taiKhoan = taiKhoanService.taoTaiKhoan(request.getUsername(), request.getPassword());
+            return ResponseEntity.ok("Tài khoản được tạo thành công với ID: " + taiKhoan.getIdTaiKhoan());
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
+
+//    @PostMapping("/tao")
+//    public ResponseEntity<?> taoTaiKhoan(@RequestBody TaiKhoan_Create_Request taiKhoan) {
+//        TaiKhoan tk = taiKhoanService.createTaiKhoan(taiKhoan);
+//        return new ResponseEntity<>(tk, HttpStatus.OK);
+//    }
 
     @PostMapping("/dangnhap")
     public ResponseEntity<?> dangNhap(@RequestBody TaiKhoan_DangNhap_Request request) {
