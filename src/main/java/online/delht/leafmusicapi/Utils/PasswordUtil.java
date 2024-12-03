@@ -16,7 +16,7 @@ public class PasswordUtil {
             }
             return sb.toString();
         } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException("Lỗi mã hóa mật khẩu", e);
+            throw new RuntimeException("Khong the ma hoa", e);
         }
     }
 }

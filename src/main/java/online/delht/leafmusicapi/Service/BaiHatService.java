@@ -116,10 +116,6 @@ public class BaiHatService {
     }
 
     //    ========================================================================
-    AlbumRepository albumRepository;
-    CaSiRepository caSiRepository;
-    KhuVucRepository khuVucRepository;
-    TheLoaiRepository theLoaiRepository;
 
     public BaiHat updateBaiHat(String id, MultipartFile file, MultipartFile img, BaiHat_CreateRequest request) throws IOException {
 

@@ -17,17 +17,6 @@ public class DeleteFileImp implements DeleteFile {
 
     private final Cloudinary cloudinary;
 
-//    @Override
-//    public void deleteFile(String publicId) throws IOException {
-//        try {
-//            cloudinary.uploader().destroy(publicId, ObjectUtils.asMap("resource_type", "raw"));
-//            log.info("File co ten {} da dc xoa khoi cloudinary.", publicId);
-//        } catch (IOException e) {
-//            log.error("Ko xoa dc file public ID {}: {}", publicId, e.getMessage());
-//            throw e;
-//        }
-//    }
-
     @Override
     public void deleteFile(String publicId) throws IOException {
         try {

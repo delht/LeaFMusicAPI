@@ -15,11 +15,6 @@ import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring")
 public interface AlbumMapper {
-//    @Mapping(source = "caSi.tenCaSi", target = "tenCaSi")
-//    Album_Respone albumToAlbumResponse(Album respone);
-
-//    @Mapping(source="baiHats.idBaiHat", target = "baiHats")
-//    Album_BaiHat_Respone to_Album_BaiHat_Respone(Album album);
 
     @Mappings({
             @Mapping(source = "caSi.tenCaSi", target = "tenCaSi"),

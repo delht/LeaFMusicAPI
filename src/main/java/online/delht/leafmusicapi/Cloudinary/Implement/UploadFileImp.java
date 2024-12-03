@@ -32,10 +32,6 @@ public class UploadFileImp implements UploadFile {
         String extension = getFileName(file.getOriginalFilename())[1];
         log.info("extension is: {}", extension);
 
-//        String folder = "Home/LeaFMusic/";
-
-//        String filePublicId = folder + publicValue;
-//        String filePublicId = foldername + publicValue;
         String filePublicId =  publicValue;
 
         File fileUpload = convert(file);

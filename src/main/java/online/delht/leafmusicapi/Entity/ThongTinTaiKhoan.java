@@ -17,7 +17,7 @@ public class ThongTinTaiKhoan {
     private Integer idThongTin;
 
     @OneToOne
-    @JoinColumn(name = "id_taikhoan", nullable = false, foreignKey = @ForeignKey(name = "fk_thongtin_taikhoan"))
+    @JoinColumn(name = "id_taikhoan", nullable = false)
     private TaiKhoan taiKhoan;
 
     @Column(name = "ten_taikhoan")
