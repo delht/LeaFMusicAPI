@@ -9,6 +9,7 @@ import online.delht.leafmusicapi.Entity.TaiKhoan;
 import online.delht.leafmusicapi.Mapper.DsYeuThichMapper;
 import online.delht.leafmusicapi.Mapper.TaiKhoanMapper;
 import online.delht.leafmusicapi.Repository.TaiKhoanRepository;
+import online.delht.leafmusicapi.Utils.PasswordUtil;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -28,10 +29,11 @@ public class TaiKhoanService {
             throw new RuntimeException("Da cos username");
         }
 
+        String passwordmahoa = PasswordUtil.maHoaPassword(password);
 
         TaiKhoan taiKhoan = new TaiKhoan();
         taiKhoan.setUsername(username);
-        taiKhoan.setPassword(password);
+        taiKhoan.setPassword(passwordmahoa);
         taiKhoan.setVaiTro(TaiKhoan.VaiTro.user);
         taiKhoan = taiKhoanRepository.save(taiKhoan);
 
@@ -44,27 +46,13 @@ public class TaiKhoanService {
     }
 
 
-//    public TaiKhoan createTaiKhoan(TaiKhoan_Create_Request taiKhoan) {
-//
-//        //dieu kien trung ten
-//
-//        TaiKhoan tk = taiKhoanMapper.toTaiKhoan(taiKhoan);
-//
-////        DsYeuThich dsYeuThich = new DsYeuThich();
-//////        dsYeuThich.setTaiKhoan(tk.setIdTaiKhoan());
-//////        dsYeuThich.setTenDanhSach("Ds yeu thich cua"+ tk.getUsername());
-//        DsYeuThich dsYeuThich = dsYeuThichMapper.dsYeuThich(taiKhoan);
-//
-//        dsYeuThichRepository.save(dsYeuThich);
-//
-//        return tk;
-//    }
-
 
     public boolean dangNhap(String username, String password) {
         TaiKhoan taiKhoan = taiKhoanRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("Ko co tai khoan"));
 
-        return taiKhoan.getPassword().equals(password);
+        String passwordmahoa = PasswordUtil.maHoaPassword(password);
+
+        return taiKhoan.getPassword().equals(passwordmahoa);
     }
 }

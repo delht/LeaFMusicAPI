@@ -30,12 +30,6 @@ public class TaiKhoanController {
         }
     }
 
-//    @PostMapping("/tao")
-//    public ResponseEntity<?> taoTaiKhoan(@RequestBody TaiKhoan_Create_Request taiKhoan) {
-//        TaiKhoan tk = taiKhoanService.createTaiKhoan(taiKhoan);
-//        return new ResponseEntity<>(tk, HttpStatus.OK);
-//    }
-
     @PostMapping("/dangnhap")
     public ResponseEntity<?> dangNhap(@RequestBody TaiKhoan_DangNhap_Request request) {
         try {
