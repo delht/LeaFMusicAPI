@@ -212,5 +212,8 @@ public class BaiHatService {
                 .orElseThrow(() -> new RuntimeException("Không tìm thấy bài hát với ID này"));
     }
 
+    public BaiHat getBaiHatById(Integer idBaiHat) {
+        return baiHatRepository.findById(String.valueOf(idBaiHat)).orElse(null);
+    }
 
 }

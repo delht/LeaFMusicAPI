@@ -13,4 +13,16 @@ public interface DsYeuThichRepository extends JpaRepository<DsYeuThich, Integer>
 
 //===========================================================================
 
+    List<DsYeuThich> findByBaiHat_IdBaiHat(Integer idBaiHat);
+
+    // Kiểm tra xem bài hát đã có trong danh sách yêu thích của tài khoản chưa
+    boolean existsByTaiKhoan_IdTaiKhoanAndBaiHat_IdBaiHat(Integer idTaiKhoan, Integer idBaiHat);
+
+    // Xóa bài hát yêu thích theo id tài khoản và id bài hát
+    void deleteByTaiKhoan_IdTaiKhoanAndBaiHat_IdBaiHat(Integer idTaiKhoan, Integer idBaiHat);
+
+    DsYeuThich findByTaiKhoan_IdTaiKhoanAndBaiHat_IdBaiHat(Integer idTaiKhoan, Integer idBaiHat);
+
+
+
 }

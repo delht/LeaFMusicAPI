@@ -55,7 +55,9 @@ public class TaiKhoanService {
     }
 
 //    ==========================================================================
-
+    public TaiKhoan getTaiKhoanById(Integer idTaiKhoan) {
+        return taiKhoanRepository.findById(String.valueOf(idTaiKhoan)).orElse(null);
+    }
 
 
 

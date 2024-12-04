@@ -39,7 +39,19 @@ public class DsYeuThichService {
 
 //    ============================================================
 
+    public void saveDsYeuThich(DsYeuThich dsYeuThich) {
+        dsYeuThichRepository.save(dsYeuThich);
+    }
 
+    public boolean deleteBaiHatYeuThich(Integer idTaiKhoan, Integer idBaiHat) {
+        DsYeuThich dsYeuThich = dsYeuThichRepository.findByTaiKhoan_IdTaiKhoanAndBaiHat_IdBaiHat(idTaiKhoan, idBaiHat);
+
+        if (dsYeuThich != null) {
+            dsYeuThichRepository.delete(dsYeuThich);
+            return true;
+        }
+        return false;
+    }
 
 
 
