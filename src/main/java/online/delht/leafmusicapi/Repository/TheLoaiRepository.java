@@ -12,6 +12,8 @@ import java.util.Optional;
 @Repository
 public interface TheLoaiRepository extends JpaRepository<TheLoai, String> {
 
+    boolean existsTheLoaiByTenTheLoai(String tenTheLoai);
+
     @EntityGraph(attributePaths = {"baiHats"})
     Optional<TheLoai> findById(@Param("id") String id);
 }

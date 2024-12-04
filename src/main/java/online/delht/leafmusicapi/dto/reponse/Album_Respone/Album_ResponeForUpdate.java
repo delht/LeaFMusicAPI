@@ -1,6 +1,5 @@
 package online.delht.leafmusicapi.dto.reponse.Album_Respone;
 
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,12 +11,11 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Album_Respone {
+public class Album_ResponeForUpdate {
 
     private Integer idAlbum;
     private String tenAlbum;
-    private String tenCaSi;
+    private String idCaSi;
     private String urlHinh;
     private LocalDateTime ngayPhatHanh;
-
 }

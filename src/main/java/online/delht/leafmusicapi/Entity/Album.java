@@ -1,5 +1,6 @@
 package online.delht.leafmusicapi.Entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -29,10 +30,17 @@ public class Album {
     @Column(name = "url_hinh", length = 255)
     private String urlHinh;
 
-    @Column(name = "ngay_phathanh", columnDefinition = "DATETIME DEFAULT CURRENT_TIMESTAMP")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    @Column(name = "ngay_phathanh")
     private LocalDateTime ngayPhatHanh;
 
     @OneToMany(mappedBy = "album")
     private List<BaiHat> baiHats;
 
+
+
+    @Override
+    public String toString() {
+        return "Album{idAlbum=" + idAlbum + ", tenAlbum='" + tenAlbum + "', urlHinh='" + urlHinh + "'}";
+    }
 }

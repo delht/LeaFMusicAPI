@@ -5,6 +5,7 @@ import online.delht.leafmusicapi.Repository.BaiHatRepository;
 import online.delht.leafmusicapi.Service.BaiHatService;
 import online.delht.leafmusicapi.Cloudinary.UploadFile;
 import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_ChiTiet_GetRespone;
+import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_GetRespone;
 import online.delht.leafmusicapi.dto.request.BaiHat_CreateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -107,7 +108,7 @@ public class BaiHatController {
 //    ===========================================================
 
     @PutMapping("/update/id={id}")
-    public ResponseEntity<?> updateBaiHat(
+    public ResponseEntity<BaiHat_GetRespone> updateBaiHat(
             @PathVariable String id,
             @RequestParam("file") MultipartFile file,
             @RequestParam("img") MultipartFile img,
@@ -118,9 +119,15 @@ public class BaiHatController {
 
             BaiHat baiHat = baiHatService.updateBaiHat(id, file, img, request);
 
-            return ResponseEntity.ok(baiHat);
+            BaiHat_GetRespone baiHatRespone = new BaiHat_GetRespone();
+            baiHatRespone.setTenBaiHat(baiHat.getTenBaiHat());
+            baiHatRespone.setUrlHinh(baiHat.getUrlHinh());
+            baiHatRespone.setUrlFile(baiHat.getUrlFile());
+
+            return ResponseEntity.ok(baiHatRespone);
         }catch (RuntimeException | IOException e) {
-            return ResponseEntity.badRequest().body(e.getMessage());
+//            return ResponseEntity.badRequest().body(e.getMessage());
+            return ResponseEntity.badRequest().body(null);
         }
 
     }

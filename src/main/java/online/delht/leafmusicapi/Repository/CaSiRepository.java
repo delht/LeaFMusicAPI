@@ -12,6 +12,9 @@ import java.util.Optional;
 @Repository
 public interface CaSiRepository extends JpaRepository<CaSi, String> {
 
+    boolean existsBaiHatByTenCaSi(String tenCaSi);
+    boolean existsBaiHatByIdCaSi(int idCaSi);
+
     //Album
     @EntityGraph(attributePaths = {"albums"})
     Optional<CaSi> findTenCaSiWithAlbumsByTenCaSi(@Param("name") String tenCaSi);

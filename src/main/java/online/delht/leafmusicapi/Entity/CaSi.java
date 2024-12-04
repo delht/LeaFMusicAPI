@@ -32,4 +32,15 @@ public class CaSi {
     @OneToMany(mappedBy = "caSi")
     private List<BaiHat> baiHats;
 
+
+
+
+    public CaSi(Integer idCaSi) {
+        this.idCaSi = idCaSi;
+    }
+
+    @Override
+    public String toString() {
+        return "CaSi{idCaSi=" + idCaSi + ", tenCaSi='" + tenCaSi + "'}";
+    }
 }

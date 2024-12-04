@@ -10,6 +10,9 @@ import java.util.Optional;
 
 @Repository
 public interface KhuVucRepository extends JpaRepository<KhuVucNhac, String> {
+
+    boolean existsByTenKhuVuc(String tenKhuVuc);
+
     @EntityGraph(attributePaths = {"baiHats"})
     Optional<KhuVucNhac> findById(String id);
 

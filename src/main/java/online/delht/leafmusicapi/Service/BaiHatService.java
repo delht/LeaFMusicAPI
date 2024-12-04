@@ -10,6 +10,7 @@ import online.delht.leafmusicapi.Cloudinary.UploadFile;
 import online.delht.leafmusicapi.Entity.*;
 import online.delht.leafmusicapi.Mapper.BaiHatMapper;
 import online.delht.leafmusicapi.Repository.*;
+import online.delht.leafmusicapi.Utils.GetPubID_Util;
 import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_ChiTiet_GetRespone;
 import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_GetRespone;
 import online.delht.leafmusicapi.dto.request.BaiHat_CreateRequest;
@@ -78,6 +79,7 @@ public class BaiHatService {
 
     DeleteFile deleteFile;
     UploadFile uploadFile;
+    GetPubID_Util getPubIDUtil;
 
     @Transactional
     public void deleteBaiHat(String id) throws IOException {
@@ -88,14 +90,14 @@ public class BaiHatService {
         //xoa file mp3
         String folderMp3 = "LeaFMusic/Mp3File/";
         String fileUrlMp3 = baiHat.getUrlFile();
-        String publicIdMp3 = layPublicIdTuURL(fileUrlMp3, folderMp3);
+        String publicIdMp3 = getPubIDUtil.layPublicIdTuURL(fileUrlMp3, folderMp3);
         log.info("Url file can xoa {}", fileUrlMp3);
         deleteFile.deleteFile(publicIdMp3);
 
         //xoa file img
         String folderImg = "LeaFMusic/Images/BaiHat/";
         String fileUrlImg = baiHat.getUrlHinh();
-        String publicIdImg = layPublicIdTuURL(fileUrlImg, folderImg);
+        String publicIdImg = getPubIDUtil.layPublicIdTuURL(fileUrlImg, folderImg);
         log.info("Url file can xoa {}", fileUrlImg);
         deleteFile.deleteFile(publicIdImg);
 
@@ -110,10 +112,10 @@ public class BaiHatService {
 //        return fileUrl.substring(start, end);
 //    }
 
-    private String layPublicIdTuURL(String fileUrl, String folder) {
-        int start = fileUrl.indexOf(folder);
-        return fileUrl.substring(start);
-    }
+//    private String layPublicIdTuURL(String fileUrl, String folder) {
+//        int start = fileUrl.indexOf(folder);
+//        return fileUrl.substring(start);
+//    }
 
     //    ========================================================================
 
@@ -181,7 +183,7 @@ public class BaiHatService {
 
             log.info("Url file can xoa {}", oldFileUrl);
 
-            String oldPublicId = layPublicIdTuURL(oldFileUrl, folderMp3);
+            String oldPublicId = getPubIDUtil.layPublicIdTuURL(oldFileUrl, folderMp3);
             deleteFile.deleteFile(oldPublicId);
 
             String newFileUrl = uploadFile.uploadFile(file, folderMp3);
@@ -192,7 +194,7 @@ public class BaiHatService {
             String folderImg = "LeaFMusic/Images/BaiHat/";
 
 //            String oldImgUrl = baiHat.getUrlHinh();
-            String oldImgPublicId = layPublicIdTuURL(oldImgUrl, folderImg);
+            String oldImgPublicId = getPubIDUtil.layPublicIdTuURL(oldImgUrl, folderImg);
             deleteFile.deleteFile(oldImgPublicId);
 
             String newImgUrl = uploadFile.uploadFile(img, folderImg);

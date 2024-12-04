@@ -12,6 +12,8 @@ import java.util.Optional;
 @Repository
 public interface AlbumRepository extends JpaRepository<Album, String> {
 
+    boolean existsAlbumByTenAlbum(String tenAlbum);
+
     @EntityGraph(attributePaths = {"baiHats"})
     Optional<Album> findById(@Param("id") String id);
 }
