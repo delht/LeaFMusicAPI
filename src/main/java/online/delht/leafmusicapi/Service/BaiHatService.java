@@ -205,6 +205,12 @@ public class BaiHatService {
 //        return null;
     }
 
+    //    ========================================================================
+
+    public BaiHat findById(String idBaiHat) {
+        return baiHatRepository.findById(idBaiHat)
+                .orElseThrow(() -> new RuntimeException("Không tìm thấy bài hát với ID này"));
+    }
 
 
 }

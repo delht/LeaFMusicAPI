@@ -45,8 +45,6 @@ public class TaiKhoanService {
         return taiKhoan;
     }
 
-
-
     public boolean dangNhap(String username, String password) {
         TaiKhoan taiKhoan = taiKhoanRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("Ko co tai khoan"));
@@ -55,4 +53,11 @@ public class TaiKhoanService {
 
         return taiKhoan.getPassword().equals(passwordmahoa);
     }
+
+//    ==========================================================================
+
+
+
+
+
 }
