@@ -14,12 +14,16 @@ import online.delht.leafmusicapi.Repository.AlbumRepository;
 import online.delht.leafmusicapi.Repository.CaSiRepository;
 import online.delht.leafmusicapi.Utils.GetPubID_Util;
 import online.delht.leafmusicapi.dto.reponse.Album_Respone.Album_BaiHat_Respone;
+import online.delht.leafmusicapi.dto.reponse.Album_Respone.Album_List;
+import online.delht.leafmusicapi.dto.reponse.CaSi_Respone.CaSi_List;
 import online.delht.leafmusicapi.dto.request.Album_Request;
 import online.delht.leafmusicapi.dto.request.CaSi_Resquest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Slf4j
 @Service
@@ -113,7 +117,19 @@ public class AlbumService {
         return albumRepository.save(albumCu);
     }
 
+//========================================================================================
 
+    public List<Album_List> getAllAlbums() {
+        List<Album_List> albumLists = new ArrayList<>();
 
+        for (Album album : albumRepository.findAll()) {
+            Album_List album_list = Album_List.builder()
+                    .idAlbum(album.getIdAlbum())
+                    .tenAlbum(album.getTenAlbum())
+                    .build();
+            albumLists.add(album_list);
+        }
+        return albumLists;
+    }
 
 }

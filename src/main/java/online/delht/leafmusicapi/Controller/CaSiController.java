@@ -5,8 +5,10 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import online.delht.leafmusicapi.Entity.CaSi;
 import online.delht.leafmusicapi.Service.CaSiService;
+import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_List;
 import online.delht.leafmusicapi.dto.reponse.CaSi_Respone.CaSi_Album_GetRespone;
 import online.delht.leafmusicapi.dto.reponse.CaSi_Respone.CaSi_BaiHat_GetRespone;
+import online.delht.leafmusicapi.dto.reponse.CaSi_Respone.CaSi_List;
 import online.delht.leafmusicapi.dto.request.CaSi_Resquest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor //bo autowired
@@ -96,6 +99,13 @@ public class CaSiController {
         } catch (IOException e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Có lỗi khi cập nhật ca sĩ");
         }
+    }
+
+    //    ===========================================================
+
+    @GetMapping("/all")
+    public List<CaSi_List> getAllCaSi() {
+        return caSiService.getAllCaSis();
     }
 
 }

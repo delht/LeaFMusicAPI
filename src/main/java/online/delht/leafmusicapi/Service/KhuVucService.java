@@ -8,11 +8,15 @@ import online.delht.leafmusicapi.Entity.TheLoai;
 import online.delht.leafmusicapi.Mapper.KhuVucMapper;
 import online.delht.leafmusicapi.Repository.KhuVucRepository;
 import online.delht.leafmusicapi.dto.reponse.KhuVuc_Respone.KhuVuc_BaiHat_Respone;
+import online.delht.leafmusicapi.dto.reponse.KhuVuc_Respone.KhuVuc_Respone;
+import online.delht.leafmusicapi.dto.reponse.TheLoai_Respone.TheLoai_Respone;
 import online.delht.leafmusicapi.dto.request.KhuVuc_Request;
 import online.delht.leafmusicapi.dto.request.TheLoai_Request;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -56,5 +60,32 @@ public class KhuVucService {
         return khuVucRepository.save(khuVucCu);
     }
 
+    //    ======================================================
+
+    public KhuVuc_Respone getKhuVucResponefindBY(String id) throws IOException {
+        if (!khuVucRepository.existsById(id)) {
+            throw new RuntimeException("Không có khu vuc theo id này");
+        }
+        KhuVucNhac khuVucNhac = khuVucRepository.findById(id).orElseThrow(() -> new RuntimeException("Không tìm thấy khu vuc"));
+
+        KhuVuc_Respone khuVucRespone = new KhuVuc_Respone();
+        khuVucRespone.setIdKhuVuc(khuVucNhac.getIdKhuVuc());
+        khuVucRespone.setTenKhuVuc(khuVucNhac.getTenKhuVuc());
+
+        return khuVucRespone;
+    }
+
+    public List<KhuVuc_Respone> getAllKhuVuc() {
+        List<KhuVuc_Respone> khuVucRespones = new ArrayList<>();
+
+        for (KhuVucNhac khuVucNhac : khuVucRepository.findAll()) {
+            KhuVuc_Respone khuVucRespone = KhuVuc_Respone.builder()
+                    .idKhuVuc(khuVucNhac.getIdKhuVuc())
+                    .tenKhuVuc(khuVucNhac.getTenKhuVuc())
+                    .build();
+            khuVucRespones.add(khuVucRespone);
+        }
+        return khuVucRespones;
+    }
 
 }

@@ -6,6 +6,7 @@ import online.delht.leafmusicapi.Service.BaiHatService;
 import online.delht.leafmusicapi.Cloudinary.UploadFile;
 import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_ChiTiet_GetRespone;
 import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_GetRespone;
+import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_List;
 import online.delht.leafmusicapi.dto.request.BaiHat_CreateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequestMapping("/baihat")
@@ -109,7 +111,7 @@ public class BaiHatController {
 
     @PutMapping("/update/id={id}")
     public ResponseEntity<BaiHat_GetRespone> updateBaiHat(
-            @PathVariable String id,
+            @PathVariable("id") String id,
             @RequestParam("file") MultipartFile file,
             @RequestParam("img") MultipartFile img,
             @RequestParam("request") String requestJson) {
@@ -130,6 +132,14 @@ public class BaiHatController {
             return ResponseEntity.badRequest().body(null);
         }
 
+    }
+
+
+//    ===========================================================
+
+    @GetMapping("/all")
+    public List<BaiHat_List> getAllBaiHats() {
+        return baiHatService.getAllBaiHats();
     }
 
 

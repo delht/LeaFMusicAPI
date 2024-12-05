@@ -5,13 +5,16 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import online.delht.leafmusicapi.Entity.TheLoai;
 import online.delht.leafmusicapi.Service.TheLoaiService;
+import online.delht.leafmusicapi.dto.reponse.Album_Respone.Album_List;
 import online.delht.leafmusicapi.dto.reponse.TheLoai_Respone.TheLoai_BaiHat_Respone;
+import online.delht.leafmusicapi.dto.reponse.TheLoai_Respone.TheLoai_Respone;
 import online.delht.leafmusicapi.dto.request.TheLoai_Request;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -63,5 +66,21 @@ public class TheLoaiController {
         }
     }
 
+//    ====================================================
+
+    @GetMapping("/getMot/id={id}")
+    public TheLoai_Respone getTheLoaiById(@PathVariable String id) throws IOException {
+        try {
+            return theLoaiService.getTheLoaiResponefindBY(id);
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Không tìm thấy thể loại với id: " + id);
+        }
+    }
+
+    @GetMapping("/all")
+    public List<TheLoai_Respone> getAllTheLoai() {
+        return theLoaiService.getAllTheLoai();
+    }
 
 }
+

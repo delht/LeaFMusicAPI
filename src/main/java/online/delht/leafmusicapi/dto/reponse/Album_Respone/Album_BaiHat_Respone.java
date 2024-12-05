@@ -21,6 +21,7 @@ public class Album_BaiHat_Respone {
     private Integer idAlbum;
     private String tenAlbum;
     private String tenCaSi;
+    private String idCaSi;
     private String urlHinh;
     private LocalDateTime ngayPhatHanh;
 
