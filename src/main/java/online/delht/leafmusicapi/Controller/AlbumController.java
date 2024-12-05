@@ -7,6 +7,8 @@ import lombok.experimental.FieldDefaults;
 import online.delht.leafmusicapi.Entity.Album;
 import online.delht.leafmusicapi.Service.AlbumService;
 import online.delht.leafmusicapi.dto.reponse.Album_Respone.Album_BaiHat_Respone;
+import online.delht.leafmusicapi.dto.reponse.Album_Respone.Album_List;
+import online.delht.leafmusicapi.dto.reponse.CaSi_Respone.CaSi_List;
 import online.delht.leafmusicapi.dto.request.Album_Request;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor //bo autowired
@@ -104,6 +107,10 @@ public class AlbumController {
         }
     }
 
+//========================================================================================================
 
-
+    @GetMapping("/all")
+    public List<Album_List> getAllAlbum() {
+        return albumService.getAllAlbums();
+    }
 }

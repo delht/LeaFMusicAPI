@@ -7,6 +7,8 @@ import online.delht.leafmusicapi.Entity.KhuVucNhac;
 import online.delht.leafmusicapi.Entity.TheLoai;
 import online.delht.leafmusicapi.Service.KhuVucService;
 import online.delht.leafmusicapi.dto.reponse.KhuVuc_Respone.KhuVuc_BaiHat_Respone;
+import online.delht.leafmusicapi.dto.reponse.KhuVuc_Respone.KhuVuc_Respone;
+import online.delht.leafmusicapi.dto.reponse.TheLoai_Respone.TheLoai_Respone;
 import online.delht.leafmusicapi.dto.request.KhuVuc_Request;
 import online.delht.leafmusicapi.dto.request.TheLoai_Request;
 import org.springframework.http.HttpStatus;
@@ -14,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -67,6 +70,21 @@ public class KhuVucController {
         }
     }
 
+//    ========================================================================
+
+    @GetMapping("/getMot/id={id}")
+    public KhuVuc_Respone getKhuVucById(@PathVariable String id) throws IOException {
+        try {
+            return khuVucService.getKhuVucResponefindBY(id);
+        } catch (RuntimeException e) {
+            throw new RuntimeException("Không tìm thấy khu vuc với id: " + id);
+        }
+    }
+
+    @GetMapping("/all")
+    public List<KhuVuc_Respone> getAllKhuVuc() {
+        return khuVucService.getAllKhuVuc();
+    }
 
 
 }

@@ -13,12 +13,14 @@ import online.delht.leafmusicapi.Repository.*;
 import online.delht.leafmusicapi.Utils.GetPubID_Util;
 import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_ChiTiet_GetRespone;
 import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_GetRespone;
+import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_List;
 import online.delht.leafmusicapi.dto.request.BaiHat_CreateRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -214,6 +216,23 @@ public class BaiHatService {
 
     public BaiHat getBaiHatById(Integer idBaiHat) {
         return baiHatRepository.findById(String.valueOf(idBaiHat)).orElse(null);
+    }
+
+
+    //    ========================================================================
+
+    public List<BaiHat_List> getAllBaiHats() {
+        List<BaiHat_List> baiHatList = new ArrayList<>();
+
+        for (BaiHat baiHat : baiHatRepository.findAll()) {
+            BaiHat_List baiHat_list = BaiHat_List.builder()
+                    .idBaiHat(baiHat.getIdBaiHat())
+                    .tenBaiHat(baiHat.getTenBaiHat())
+                    .build();
+            baiHatList.add(baiHat_list);
+        }
+
+        return baiHatList;
     }
 
 }

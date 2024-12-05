@@ -20,6 +20,7 @@ public interface AlbumMapper {
 
     @Mappings({
             @Mapping(source = "caSi.tenCaSi", target = "tenCaSi"),
+            @Mapping(source = "caSi.idCaSi", target = "idCaSi"),
             @Mapping(source = "baiHats", target = "baiHats")
     })
     Album_BaiHat_Respone to_Album_BaiHat_Respone(Album album);

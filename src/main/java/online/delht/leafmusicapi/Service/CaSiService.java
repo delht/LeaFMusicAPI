@@ -5,12 +5,15 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import online.delht.leafmusicapi.Entity.BaiHat;
 import online.delht.leafmusicapi.Entity.CaSi;
 import online.delht.leafmusicapi.Mapper.CaSiMapper;
 import online.delht.leafmusicapi.Repository.CaSiRepository;
 import online.delht.leafmusicapi.Utils.GetPubID_Util;
+import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_List;
 import online.delht.leafmusicapi.dto.reponse.CaSi_Respone.CaSi_Album_GetRespone;
 import online.delht.leafmusicapi.dto.reponse.CaSi_Respone.CaSi_BaiHat_GetRespone;
+import online.delht.leafmusicapi.dto.reponse.CaSi_Respone.CaSi_List;
 import online.delht.leafmusicapi.dto.request.CaSi_Resquest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,6 +22,9 @@ import online.delht.leafmusicapi.Cloudinary.DeleteFile;
 import online.delht.leafmusicapi.Cloudinary.UploadFile;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -114,6 +120,21 @@ public class CaSiService {
         return caSiRepository.save(caSiCu);
     }
 
+
+//==========================================================================
+
+    public List<CaSi_List> getAllCaSis() {
+        List<CaSi_List> caSiLists = new ArrayList<>();
+
+        for (CaSi caSi : caSiRepository.findAll()) {
+            CaSi_List caSi_list = CaSi_List.builder()
+                    .idCaSi(caSi.getIdCaSi())
+                    .tenCaSi(caSi.getTenCaSi())
+                    .build();
+            caSiLists.add(caSi_list);
+        }
+        return caSiLists;
+    }
 
 
 
