@@ -130,6 +130,7 @@ public class CaSiService {
             CaSi_List caSi_list = CaSi_List.builder()
                     .idCaSi(caSi.getIdCaSi())
                     .tenCaSi(caSi.getTenCaSi())
+                    .urlHinh(caSi.getUrlHinh())
                     .build();
             caSiLists.add(caSi_list);
         }

@@ -12,6 +12,8 @@ import online.delht.leafmusicapi.Repository.TaiKhoanRepository;
 import online.delht.leafmusicapi.Utils.PasswordUtil;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor //bo autowired
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true) //bo private
@@ -57,6 +59,21 @@ public class TaiKhoanService {
 //    ==========================================================================
     public TaiKhoan getTaiKhoanById(Integer idTaiKhoan) {
         return taiKhoanRepository.findById(String.valueOf(idTaiKhoan)).orElse(null);
+    }
+
+    public TaiKhoan dangNhap2(String username, String password) {
+        String passwordmahoa = PasswordUtil.maHoaPassword(password);
+
+        Optional<TaiKhoan> taiKhoanOptional = taiKhoanRepository.findByUsername(username);
+
+        if (taiKhoanOptional.isPresent()) {
+            TaiKhoan taiKhoan = taiKhoanOptional.get();
+
+            if (taiKhoan.getPassword().equals(passwordmahoa)) {
+                return taiKhoan;
+            }
+        }
+        return null;
     }
 
 

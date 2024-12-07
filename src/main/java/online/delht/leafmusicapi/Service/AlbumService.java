@@ -126,6 +126,7 @@ public class AlbumService {
             Album_List album_list = Album_List.builder()
                     .idAlbum(album.getIdAlbum())
                     .tenAlbum(album.getTenAlbum())
+                    .urlHinh(album.getUrlHinh())
                     .build();
             albumLists.add(album_list);
         }

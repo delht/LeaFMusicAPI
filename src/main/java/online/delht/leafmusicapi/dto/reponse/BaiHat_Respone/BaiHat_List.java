@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class BaiHat_List {
     private Integer idBaiHat;
     private String tenBaiHat;
+    private String urlHinh;
 }

@@ -15,4 +15,5 @@ public class CaSi_List {
 
     private int idCaSi;
     private String tenCaSi;
+    private String urlHinh;
 }

@@ -2,6 +2,7 @@ package online.delht.leafmusicapi.Controller;
 
 import online.delht.leafmusicapi.Entity.TaiKhoan;
 import online.delht.leafmusicapi.Service.TaiKhoanService;
+import online.delht.leafmusicapi.dto.reponse.Login_Respone.Login_Respone;
 import online.delht.leafmusicapi.dto.request.TaiKhoan_Create_Request;
 import online.delht.leafmusicapi.dto.request.TaiKhoan_DangNhap_Request;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,23 @@ public class TaiKhoanController {
             }
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+//    ==============================================================================
+
+    @PostMapping("/dangnhap2")
+    public ResponseEntity<Login_Respone> dangNhap2(@RequestBody TaiKhoan_DangNhap_Request request) {
+        try {
+            TaiKhoan taiKhoan = taiKhoanService.dangNhap2(request.getUsername(), request.getPassword());
+            if (taiKhoan != null) {
+                Login_Respone loginResponse = new Login_Respone(taiKhoan.getIdTaiKhoan().toString(), taiKhoan.getUsername());
+                return ResponseEntity.ok(loginResponse);
+            } else {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
+            }
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(null);
         }
     }
 

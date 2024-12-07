@@ -22,6 +22,8 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
+import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor //bo autowired
@@ -228,11 +230,30 @@ public class BaiHatService {
             BaiHat_List baiHat_list = BaiHat_List.builder()
                     .idBaiHat(baiHat.getIdBaiHat())
                     .tenBaiHat(baiHat.getTenBaiHat())
+                    .urlHinh(baiHat.getUrlHinh())
                     .build();
             baiHatList.add(baiHat_list);
         }
 
         return baiHatList;
     }
+
+    public List<BaiHat_List> getRandomSongs(int count) {
+        List<BaiHat> allSongs = baiHatRepository.findAll(); // Lấy tất cả bài hát từ database
+        Random random = new Random();
+
+        // Lấy các bài hát ngẫu nhiên và chuyển đổi thành BaiHat_List
+        return random.ints(0, allSongs.size())
+                .distinct()
+                .limit(count)
+                .mapToObj(allSongs::get)
+                .map(baiHat -> BaiHat_List.builder()
+                        .idBaiHat(baiHat.getIdBaiHat())
+                        .tenBaiHat(baiHat.getTenBaiHat())
+                        .urlHinh(baiHat.getUrlHinh())
+                        .build())
+                .collect(Collectors.toList());
+    }
+
 
 }

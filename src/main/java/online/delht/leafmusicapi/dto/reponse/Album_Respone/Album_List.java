@@ -14,4 +14,5 @@ import lombok.NoArgsConstructor;
 public class Album_List {
     private Integer idAlbum;
     private String tenAlbum;
+    private String urlHinh;
 }
