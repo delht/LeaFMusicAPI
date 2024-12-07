@@ -20,38 +20,38 @@ import java.util.stream.Collectors;
 @Slf4j
 
 public class DsYeuThichService {
-    @Autowired
-    private DsYeuThichRepository dsYeuThichRepository;
-
-    @Autowired
-    private BaiHatRepository baiHatRepository;
-
-    public List<BaiHat> getLikedSongs(Integer idTaiKhoan) {
-        List<DsYeuThich> dsYeuThichList = dsYeuThichRepository.findByTaiKhoan_IdTaiKhoan(idTaiKhoan);
-        return dsYeuThichList.stream()
-                .map(dsYeuThich -> dsYeuThich.getBaiHat())
-                .collect(Collectors.toList());
-    }
-
-    public List<DsYeuThich> findByTaiKhoan_IdTaiKhoan(Integer idTaiKhoan) {
-        return dsYeuThichRepository.findByTaiKhoan_IdTaiKhoan(idTaiKhoan);
-    }
-
-//    ============================================================
-
-    public void saveDsYeuThich(DsYeuThich dsYeuThich) {
-        dsYeuThichRepository.save(dsYeuThich);
-    }
-
-    public boolean deleteBaiHatYeuThich(Integer idTaiKhoan, Integer idBaiHat) {
-        DsYeuThich dsYeuThich = dsYeuThichRepository.findByTaiKhoan_IdTaiKhoanAndBaiHat_IdBaiHat(idTaiKhoan, idBaiHat);
-
-        if (dsYeuThich != null) {
-            dsYeuThichRepository.delete(dsYeuThich);
-            return true;
-        }
-        return false;
-    }
+//    @Autowired
+//    private DsYeuThichRepository dsYeuThichRepository;
+//
+//    @Autowired
+//    private BaiHatRepository baiHatRepository;
+//
+//    public List<BaiHat> getLikedSongs(Integer idTaiKhoan) {
+//        List<DsYeuThich> dsYeuThichList = dsYeuThichRepository.findByTaiKhoan_IdTaiKhoan(idTaiKhoan);
+//        return dsYeuThichList.stream()
+//                .map(dsYeuThich -> dsYeuThich.getBaiHat())
+//                .collect(Collectors.toList());
+//    }
+//
+//    public List<DsYeuThich> findByTaiKhoan_IdTaiKhoan(Integer idTaiKhoan) {
+//        return dsYeuThichRepository.findByTaiKhoan_IdTaiKhoan(idTaiKhoan);
+//    }
+//
+////    ============================================================
+//
+//    public void saveDsYeuThich(DsYeuThich dsYeuThich) {
+//        dsYeuThichRepository.save(dsYeuThich);
+//    }
+//
+//    public boolean deleteBaiHatYeuThich(Integer idTaiKhoan, Integer idBaiHat) {
+//        DsYeuThich dsYeuThich = dsYeuThichRepository.findByTaiKhoan_IdTaiKhoanAndBaiHat_IdBaiHat(idTaiKhoan, idBaiHat);
+//
+//        if (dsYeuThich != null) {
+//            dsYeuThichRepository.delete(dsYeuThich);
+//            return true;
+//        }
+//        return false;
+//    }
 
 
 

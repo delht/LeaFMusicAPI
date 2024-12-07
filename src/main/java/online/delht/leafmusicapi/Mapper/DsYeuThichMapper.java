@@ -17,11 +17,11 @@ public interface DsYeuThichMapper {
 
 
     // Ánh xạ từ DsYeuThich sang BaiHat_DsYeuThich_Respone
-    @Mappings({
-            @Mapping(source = "baiHat.idBaiHat", target = "idBaiHat"),
-            @Mapping(source = "baiHat.tenBaiHat", target = "tenBaiHat")
-    })
-    BaiHat_DsYeuThich_Respone toBaiHatDsYeuThichResponse(DsYeuThich dsYeuThich);
+//    @Mappings({
+//            @Mapping(source = "baiHat.idBaiHat", target = "idBaiHat"),
+//            @Mapping(source = "baiHat.tenBaiHat", target = "tenBaiHat")
+//    })
+//    BaiHat_DsYeuThich_Respone toBaiHatDsYeuThichResponse(DsYeuThich dsYeuThich);
 
     // Ánh xạ danh sách DsYeuThich sang danh sách BaiHat_DsYeuThich_Respone
     List<BaiHat_DsYeuThich_Respone> toBaiHatDsYeuThichResponseList(List<DsYeuThich> dsYeuThichList);
