@@ -142,6 +142,11 @@ public class BaiHatController {
         return baiHatService.getAllBaiHats();
     }
 
+    @GetMapping("/randombaihat5")
+    public List<BaiHat_List> getRandomSongs(@RequestParam(defaultValue = "5") int count) {
+        return baiHatService.getRandomSongs(count);
+    }
+
 
 
 }
