@@ -4,12 +4,16 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import online.delht.leafmusicapi.Repository.BaiHatDsYeuThichRepository;
+import online.delht.leafmusicapi.Service.BaiHatService;
 import online.delht.leafmusicapi.Service.DsYeuThichService;
+import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_DS_YeuThich;
 import online.delht.leafmusicapi.dto.request.BaiHatDsYeuThich_Request;
 import online.delht.leafmusicapi.dto.request.DsYeuThich_Request;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -153,6 +157,14 @@ public class DsYeuThichController {
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
+    }
+
+//    ============================================================
+    BaiHatService baiHatService;
+
+    @GetMapping("/baihat/id={id}")
+    public List<BaiHat_DS_YeuThich> getBaiHatByDanhSach(@PathVariable("id") Integer idDs) {
+        return baiHatService.getBaiHatByDanhSach(idDs);
     }
 
 }
