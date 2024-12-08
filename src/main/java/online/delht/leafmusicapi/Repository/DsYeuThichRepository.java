@@ -6,13 +6,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
-public interface DsYeuThichRepository extends JpaRepository<DsYeuThich, Integer> {
-//    List<DsYeuThich> findByTaiKhoan_IdTaiKhoan(Integer idTaiKhoan);
-//
-////===========================================================================
-//
+public interface DsYeuThichRepository extends JpaRepository<DsYeuThich, String> {
+    List<DsYeuThich> findByTaiKhoan_IdTaiKhoan(Integer idTaiKhoan);
+
+//===========================================================================
+
 //    List<DsYeuThich> findByBaiHat_IdBaiHat(Integer idBaiHat);
 //
 //    // Kiểm tra xem bài hát đã có trong danh sách yêu thích của tài khoản chưa
@@ -23,6 +24,8 @@ public interface DsYeuThichRepository extends JpaRepository<DsYeuThich, Integer>
 //
 //    DsYeuThich findByTaiKhoan_IdTaiKhoanAndBaiHat_IdBaiHat(Integer idTaiKhoan, Integer idBaiHat);
 //
+
+    Optional<DsYeuThich> findByTaiKhoanAndLoaiDs(TaiKhoan taiKhoan, DsYeuThich.LoaiDanhSach loaiDs);
 
 
 }

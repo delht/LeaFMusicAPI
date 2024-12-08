@@ -12,15 +12,19 @@ import lombok.NoArgsConstructor;
 @Table(name = "baihat_ds_yeuthich")
 public class BaiHatDsYeuThich {
 
-    @EmbeddedId
-    private BaiHatDsYeuThichId id;
+//    @EmbeddedId
+//    private BaiHatDsYeuThichId id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_item")
+    private Integer is_item;
 
     @ManyToOne
-    @JoinColumn(name = "id_ds", referencedColumnName = "id_ds", insertable = false, updatable = false)
+    @JoinColumn(name = "id_ds")
     private DsYeuThich dsYeuThich;
 
     @ManyToOne
-    @JoinColumn(name = "id_baihat", referencedColumnName = "id_baihat", insertable = false, updatable = false)
+    @JoinColumn(name = "id_baihat")
     private BaiHat baiHat;
 
 }

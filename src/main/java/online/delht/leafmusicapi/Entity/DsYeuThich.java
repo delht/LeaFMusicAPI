@@ -27,11 +27,11 @@ public class DsYeuThich {
     private String tenDs;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "loai_ds", columnDefinition = "ENUM('macdinh', 'custom')")
+    @Column(name = "loai_ds", columnDefinition = "ENUM('macdinh', 'custom') DEFAULT 'custom' ")
     private LoaiDanhSach loaiDs;
 
-    @OneToMany(mappedBy = "dsYeuThich")
-    private List<BaiHatDsYeuThich> baiHatDsYeuThichList;
+//    @OneToMany(mappedBy = "dsYeuThich")
+//    private List<BaiHatDsYeuThich> baiHatDsYeuThichList;
 
     public enum LoaiDanhSach {
         macdinh , custom
