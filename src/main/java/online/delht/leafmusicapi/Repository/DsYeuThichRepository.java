@@ -2,7 +2,10 @@ package online.delht.leafmusicapi.Repository;
 
 import online.delht.leafmusicapi.Entity.DsYeuThich;
 import online.delht.leafmusicapi.Entity.TaiKhoan;
+import online.delht.leafmusicapi.dto.reponse.DsYeuThich_Respone.DsMacDinh_Respone;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -26,6 +29,10 @@ public interface DsYeuThichRepository extends JpaRepository<DsYeuThich, String> 
 //
 
     Optional<DsYeuThich> findByTaiKhoanAndLoaiDs(TaiKhoan taiKhoan, DsYeuThich.LoaiDanhSach loaiDs);
+
+    @Query("SELECT new online.delht.leafmusicapi.dto.reponse.DsYeuThich_Respone.DsMacDinh_Respone(d.idDanhSach, d.loaiDs, d.tenDs) FROM DsYeuThich d WHERE d.loaiDs = :loaiDs AND d.taiKhoan.idTaiKhoan = :taiKhoanId")
+    List<DsMacDinh_Respone> findByLoaiDsAndTaiKhoanId(@Param("loaiDs") DsYeuThich.LoaiDanhSach loaiDs, @Param("taiKhoanId") Integer taiKhoanId);
+
 
 
 }

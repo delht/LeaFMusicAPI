@@ -13,6 +13,7 @@ import online.delht.leafmusicapi.Repository.BaiHatDsYeuThichRepository;
 import online.delht.leafmusicapi.Repository.BaiHatRepository;
 import online.delht.leafmusicapi.Repository.DsYeuThichRepository;
 import online.delht.leafmusicapi.Repository.TaiKhoanRepository;
+import online.delht.leafmusicapi.dto.reponse.DsYeuThich_Respone.DsMacDinh_Respone;
 import online.delht.leafmusicapi.dto.request.BaiHatDsYeuThich_Request;
 import online.delht.leafmusicapi.dto.request.DsYeuThich_Request;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -282,6 +283,14 @@ public class DsYeuThichService {
         }
     }
 
+//    ================================================================================
 
+    public List<DsMacDinh_Respone> getDsYeuThichMacDinhByTaiKhoan(Integer idTaiKhoan) {
+        return dsYeuThichRepository.findByLoaiDsAndTaiKhoanId(DsYeuThich.LoaiDanhSach.macdinh, idTaiKhoan);
+    }
+
+    public List<DsMacDinh_Respone> getDsYeuThichCustomByTaiKhoan(Integer idTaiKhoan) {
+        return dsYeuThichRepository.findByLoaiDsAndTaiKhoanId(DsYeuThich.LoaiDanhSach.custom, idTaiKhoan);
+    }
 
 }

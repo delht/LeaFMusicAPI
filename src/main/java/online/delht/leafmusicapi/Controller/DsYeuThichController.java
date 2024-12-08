@@ -3,10 +3,12 @@ package online.delht.leafmusicapi.Controller;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
+import online.delht.leafmusicapi.Entity.DsYeuThich;
 import online.delht.leafmusicapi.Repository.BaiHatDsYeuThichRepository;
 import online.delht.leafmusicapi.Service.BaiHatService;
 import online.delht.leafmusicapi.Service.DsYeuThichService;
 import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_DS_YeuThich;
+import online.delht.leafmusicapi.dto.reponse.DsYeuThich_Respone.DsMacDinh_Respone;
 import online.delht.leafmusicapi.dto.request.BaiHatDsYeuThich_Request;
 import online.delht.leafmusicapi.dto.request.DsYeuThich_Request;
 import org.springframework.http.HttpStatus;
@@ -166,5 +168,18 @@ public class DsYeuThichController {
     public List<BaiHat_DS_YeuThich> getBaiHatByDanhSach(@PathVariable("id") Integer idDs) {
         return baiHatService.getBaiHatByDanhSach(idDs);
     }
+
+//    ==============================================================
+
+    @GetMapping("/macdinh/id={id}")
+    public List<DsMacDinh_Respone> getDsYeuThichMacDinh(@PathVariable("id") Integer idTaiKhoan) {
+        return dsYeuThichService.getDsYeuThichMacDinhByTaiKhoan(idTaiKhoan);
+    }
+
+    @GetMapping("/custom/id={id}")
+    public List<DsMacDinh_Respone> getDsYeuThichCustom(@PathVariable("id") Integer idTaiKhoan) {
+        return dsYeuThichService.getDsYeuThichCustomByTaiKhoan(idTaiKhoan);
+    }
+
 
 }
