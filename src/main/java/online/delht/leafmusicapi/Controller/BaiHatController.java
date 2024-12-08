@@ -5,6 +5,7 @@ import online.delht.leafmusicapi.Repository.BaiHatRepository;
 import online.delht.leafmusicapi.Service.BaiHatService;
 import online.delht.leafmusicapi.Cloudinary.UploadFile;
 import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_ChiTiet_GetRespone;
+import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_DS_YeuThich;
 import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_GetRespone;
 import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_List;
 import online.delht.leafmusicapi.dto.request.BaiHat_CreateRequest;
@@ -146,6 +147,9 @@ public class BaiHatController {
     public List<BaiHat_List> getRandomSongs(@RequestParam(defaultValue = "5") int count) {
         return baiHatService.getRandomSongs(count);
     }
+
+//=================================
+
 
 
 

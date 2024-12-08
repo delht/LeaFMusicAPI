@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class DsYeuThich_Request {
-    private String tenDs;
-    private Integer idTaiKhoan;
-    private String loaiDs;
+public class BaiHatDsYeuThich_Request {
+
+    private Integer idDs;
+    private Integer idBaihat;
 }

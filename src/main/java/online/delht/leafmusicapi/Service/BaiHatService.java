@@ -12,6 +12,7 @@ import online.delht.leafmusicapi.Mapper.BaiHatMapper;
 import online.delht.leafmusicapi.Repository.*;
 import online.delht.leafmusicapi.Utils.GetPubID_Util;
 import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_ChiTiet_GetRespone;
+import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_DS_YeuThich;
 import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_GetRespone;
 import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_List;
 import online.delht.leafmusicapi.dto.request.BaiHat_CreateRequest;
@@ -253,6 +254,16 @@ public class BaiHatService {
                         .urlHinh(baiHat.getUrlHinh())
                         .build())
                 .collect(Collectors.toList());
+    }
+
+
+
+
+//    =================
+    BaiHatDsYeuThichRepository baiHatDsYeuThichRepository;
+
+    public List<BaiHat_DS_YeuThich> getBaiHatByDanhSach(Integer idDs) {
+        return baiHatDsYeuThichRepository.findBaiHatByIdDanhSach(idDs);
     }
 
 

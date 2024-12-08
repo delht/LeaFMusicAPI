@@ -8,6 +8,7 @@ import online.delht.leafmusicapi.Entity.DsYeuThich;
 import online.delht.leafmusicapi.Entity.TaiKhoan;
 import online.delht.leafmusicapi.Mapper.DsYeuThichMapper;
 import online.delht.leafmusicapi.Mapper.TaiKhoanMapper;
+import online.delht.leafmusicapi.Repository.DsYeuThichRepository;
 import online.delht.leafmusicapi.Repository.TaiKhoanRepository;
 import online.delht.leafmusicapi.Utils.PasswordUtil;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,7 @@ import java.util.Optional;
 public class TaiKhoanService {
 
     private TaiKhoanRepository taiKhoanRepository;
+    private DsYeuThichRepository dsYeuThichRepository;
     TaiKhoanMapper taiKhoanMapper;
     DsYeuThichMapper dsYeuThichMapper;
 
@@ -42,7 +44,9 @@ public class TaiKhoanService {
 
         DsYeuThich dsYeuThich = new DsYeuThich();
         dsYeuThich.setTaiKhoan(taiKhoan);
-//        dsYeuThich.setTenDanhSach("Ds yeu thich cua"+ username);
+        dsYeuThich.setTenDs("Danh sách yêu thích của "+ username);
+        dsYeuThich.setLoaiDs(DsYeuThich.LoaiDanhSach.macdinh);
+        dsYeuThichRepository.save(dsYeuThich);
 
         return taiKhoan;
     }
