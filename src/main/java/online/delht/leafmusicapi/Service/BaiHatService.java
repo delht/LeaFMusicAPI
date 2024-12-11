@@ -266,5 +266,28 @@ public class BaiHatService {
         return baiHatDsYeuThichRepository.findBaiHatByIdDanhSach(idDs);
     }
 
+//    ==========================
+
+    public BaiHat_GetRespone getBaiHatById2(Integer id) {
+        BaiHat baiHat = baiHatRepository.findById(String.valueOf(id)).orElse(null);
+        if (baiHat == null) {
+            return null; // Hoặc xử lý ngoại lệ nếu cần
+        }
+
+        // Ánh xạ từ BaiHat entity sang BaiHat_GetRespone DTO
+        BaiHat_GetRespone baiHatGetRespone = new BaiHat_GetRespone();
+        baiHatGetRespone.setIdBaiHat(baiHat.getIdBaiHat());
+        baiHatGetRespone.setTenBaiHat(baiHat.getTenBaiHat());
+        baiHatGetRespone.setCaSi(baiHat.getCaSi() != null ? baiHat.getCaSi().getTenCaSi() : null);
+        baiHatGetRespone.setTheLoai(baiHat.getTheLoai() != null ? baiHat.getTheLoai().getTenTheLoai() : null);
+        baiHatGetRespone.setAlbum(baiHat.getAlbum() != null ? baiHat.getAlbum().getTenAlbum() : null);
+        baiHatGetRespone.setKhuVucNhac(baiHat.getKhuVucNhac() != null ? baiHat.getKhuVucNhac().getTenKhuVuc() : null);
+        baiHatGetRespone.setUrlHinh(baiHat.getUrlHinh());
+        baiHatGetRespone.setUrlFile(baiHat.getUrlFile());
+        baiHatGetRespone.setNgayPhatHanh(baiHat.getNgayPhatHanh());
+
+        return baiHatGetRespone;
+    }
+
 
 }
