@@ -144,4 +144,10 @@ public class CaSiService {
         return caSi.getAlbums();
     }
 
+    public List<BaiHat> getBaiHatsByCaSi(Integer idCaSi) {
+        CaSi caSi = caSiRepository.findById(String.valueOf(idCaSi))
+                .orElseThrow(() -> new RuntimeException("Ca sĩ không tồn tại"));
+        return caSi.getBaiHats();
+    }
+
 }

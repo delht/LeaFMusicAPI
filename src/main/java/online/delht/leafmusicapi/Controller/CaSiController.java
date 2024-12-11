@@ -6,6 +6,7 @@ import lombok.experimental.FieldDefaults;
 import online.delht.leafmusicapi.Entity.CaSi;
 import online.delht.leafmusicapi.Service.CaSiService;
 import online.delht.leafmusicapi.dto.reponse.Album_Respone.Album_Artist_Respone;
+import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_CaSi_Respone;
 import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_List;
 import online.delht.leafmusicapi.dto.reponse.CaSi_Respone.CaSi_Album_GetRespone;
 import online.delht.leafmusicapi.dto.reponse.CaSi_Respone.CaSi_BaiHat_GetRespone;
@@ -112,10 +113,18 @@ public class CaSiController {
 
     @GetMapping("/album/id={id}")
     public List<Album_Artist_Respone> getAlbumsByCaSi(@PathVariable("id") Integer idCaSi) {
-        List<Album_Artist_Respone> albumDTOs = caSiService.getAlbumsByCaSi(idCaSi).stream()
+        List<Album_Artist_Respone> albumArtistRespones = caSiService.getAlbumsByCaSi(idCaSi).stream()
                 .map(album -> new Album_Artist_Respone(album.getIdAlbum(), album.getTenAlbum(), album.getUrlHinh()))
                 .collect(Collectors.toList());
-        return albumDTOs;
+        return albumArtistRespones;
+    }
+
+    @GetMapping("/baihat/id={id}")
+    public List<BaiHat_CaSi_Respone> getBaiHatsByCaSi(@PathVariable("id") Integer idCaSi) {
+        List<BaiHat_CaSi_Respone> baiHatCaSiRespones = caSiService.getBaiHatsByCaSi(idCaSi).stream()
+                .map(baiHat -> new BaiHat_CaSi_Respone(baiHat.getIdBaiHat(), baiHat.getTenBaiHat(), baiHat.getUrlHinh()))
+                .collect(Collectors.toList());
+        return baiHatCaSiRespones;
     }
 
 }
