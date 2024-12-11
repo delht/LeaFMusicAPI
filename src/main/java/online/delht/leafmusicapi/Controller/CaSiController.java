@@ -5,6 +5,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import online.delht.leafmusicapi.Entity.CaSi;
 import online.delht.leafmusicapi.Service.CaSiService;
+import online.delht.leafmusicapi.dto.reponse.Album_Respone.Album_Artist_Respone;
 import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_List;
 import online.delht.leafmusicapi.dto.reponse.CaSi_Respone.CaSi_Album_GetRespone;
 import online.delht.leafmusicapi.dto.reponse.CaSi_Respone.CaSi_BaiHat_GetRespone;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequiredArgsConstructor //bo autowired
@@ -106,6 +108,14 @@ public class CaSiController {
     @GetMapping("/all")
     public List<CaSi_List> getAllCaSi() {
         return caSiService.getAllCaSis();
+    }
+
+    @GetMapping("/album/id={id}")
+    public List<Album_Artist_Respone> getAlbumsByCaSi(@PathVariable("id") Integer idCaSi) {
+        List<Album_Artist_Respone> albumDTOs = caSiService.getAlbumsByCaSi(idCaSi).stream()
+                .map(album -> new Album_Artist_Respone(album.getIdAlbum(), album.getTenAlbum(), album.getUrlHinh()))
+                .collect(Collectors.toList());
+        return albumDTOs;
     }
 
 }

@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import lombok.extern.slf4j.Slf4j;
+import online.delht.leafmusicapi.Entity.Album;
 import online.delht.leafmusicapi.Entity.BaiHat;
 import online.delht.leafmusicapi.Entity.CaSi;
 import online.delht.leafmusicapi.Mapper.CaSiMapper;
@@ -137,6 +138,10 @@ public class CaSiService {
         return caSiLists;
     }
 
-
+    public List<Album> getAlbumsByCaSi(Integer idCaSi) {
+        CaSi caSi = caSiRepository.findById(String.valueOf(idCaSi))
+                .orElseThrow(() -> new RuntimeException("Ca sĩ không tồn tại"));
+        return caSi.getAlbums();
+    }
 
 }
