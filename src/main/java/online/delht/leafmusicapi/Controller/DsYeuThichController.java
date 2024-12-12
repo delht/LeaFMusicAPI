@@ -139,6 +139,20 @@ public class DsYeuThichController {
         }
     }
 
+
+    @PutMapping("/update2/id={id}")
+    public ResponseEntity<String> updateTenDs2(@PathVariable("id") Integer idDs, @RequestBody String tenDs) {
+        try {
+            // Gọi service để sửa tên danh sách yêu thích
+            dsYeuThichService.updateTenDs(idDs, tenDs);
+            return ResponseEntity.status(HttpStatus.OK).body("Tên danh sách yêu thích đã được cập nhật.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+
+
 //    =========================
 
     @PostMapping("/addCustom")
