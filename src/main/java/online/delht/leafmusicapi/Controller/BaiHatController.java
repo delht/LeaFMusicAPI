@@ -150,7 +150,7 @@ public class BaiHatController {
 
 //=================================
 
-    @GetMapping("/getBH/id={id}")
+    @GetMapping("/getBH/{id}")
     public BaiHat_GetRespone getBaiHat(@PathVariable("id") Integer id) {
         return baiHatService.getBaiHatById2(id);
     }

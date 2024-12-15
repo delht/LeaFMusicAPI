@@ -11,5 +11,5 @@ import lombok.NoArgsConstructor;
 public class DsYeuThich_Request {
     private String tenDs;
     private Integer idTaiKhoan;
-    private String loaiDs;
+//    private String loaiDs;
 }
