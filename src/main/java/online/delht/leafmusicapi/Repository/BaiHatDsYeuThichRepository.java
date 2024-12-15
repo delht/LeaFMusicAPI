@@ -37,7 +37,7 @@ public interface BaiHatDsYeuThichRepository extends JpaRepository<BaiHatDsYeuThi
 //            "WHERE b.idBaiHat IN (SELECT bdy.baiHat.idBaiHat FROM BaiHatDsYeuThich bdy WHERE bdy.dsYeuThich.idDanhSach = :idDs)")
 //    List<BaiHat_DS_YeuThich> findBaiHatByIdDanhSach(@Param("idDs") Integer idDs);
 
-    @Query("SELECT new online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_DS_YeuThich(b.idBaiHat, b.tenBaiHat, b.urlFile) " +
+    @Query("SELECT new online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_DS_YeuThich(b.idBaiHat, b.tenBaiHat, b.caSi.tenCaSi, b.theLoai.tenTheLoai, b.album.tenAlbum, b.khuVucNhac.tenKhuVuc, b.urlHinh, b.urlFile, b.ngayPhatHanh) " +
             "FROM BaiHat b " +
             "JOIN BaiHatDsYeuThich bdy ON b.idBaiHat = bdy.baiHat.idBaiHat " +
             "WHERE bdy.dsYeuThich.idDanhSach = :idDs")
