@@ -177,10 +177,30 @@ public class DsYeuThichController {
         }
     }
 
+    @PostMapping("/addCustom/{idDs}/{idBaiHat}")
+    public ResponseEntity<String> addBaiHatToYeuThichCustom(@PathVariable("idDs") String idDs, @PathVariable("idBaiHat") String idBaihat) {
+        try {
+            dsYeuThichService.addBaiHatToYeuThichCustom(idDs, idBaihat);
+            return ResponseEntity.ok("Bài hát đã được thêm vào danh sách yêu thích.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
     @DeleteMapping("/removeCustom")
     public ResponseEntity<String> removeBaiHatFromYeuThichCustom(@RequestBody BaiHatDsYeuThich_Request request) {
         try {
             dsYeuThichService.removeBaiHatFromYeuThichCustom(request);
+            return ResponseEntity.ok("Bài hát đã được xóa khỏi danh sách yêu thích.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/removeCustom/{idDs}/{idBaiHat}")
+    public ResponseEntity<String> removeBaiHatFromYeuThichCustom(@PathVariable("idDs") String idDs, @PathVariable("idBaiHat") String idBaihat) {
+        try {
+            dsYeuThichService.removeBaiHatFromYeuThichCustom(idDs, idBaihat);
             return ResponseEntity.ok("Bài hát đã được xóa khỏi danh sách yêu thích.");
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

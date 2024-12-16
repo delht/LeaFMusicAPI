@@ -286,6 +286,41 @@ public class DsYeuThichService {
         }
     }
 
+
+    public void addBaiHatToYeuThichCustom(String idDs, String idBaihat) {
+        // Kiểm tra xem id_ds có thuộc loại "custom" không
+        Optional<DsYeuThich> dsYeuThichOptional = dsYeuThichRepository.findById(String.valueOf(idDs));
+        if (dsYeuThichOptional.isPresent()) {
+            DsYeuThich dsYeuThich = dsYeuThichOptional.get();
+            if (dsYeuThich.getLoaiDs() == DsYeuThich.LoaiDanhSach.custom) {
+                // Kiểm tra xem bài hát có tồn tại trong bảng baihat không
+                Optional<BaiHat> baiHatOptional = baiHatRepository.findById(String.valueOf(idBaihat));
+                if (baiHatOptional.isPresent()) {
+                    BaiHat baiHat = baiHatOptional.get();
+
+                    // Kiểm tra sự tồn tại của bài hát trong danh sách yêu thích
+                    Optional<BaiHatDsYeuThich> baiHatDsYeuThichOptional = baiHatDsYeuThichRepository.findByDsYeuThichAndBaiHat(dsYeuThich, baiHat);
+                    if (baiHatDsYeuThichOptional.isPresent()) {
+                        throw new RuntimeException("Bài hát đã có trong danh sách yêu thích.");
+                    }
+
+                    // Tạo và lưu đối tượng mới vào bảng baihat_ds_yeuthich
+                    BaiHatDsYeuThich baiHatDsYeuThich = new BaiHatDsYeuThich();
+                    baiHatDsYeuThich.setDsYeuThich(dsYeuThich);
+                    baiHatDsYeuThich.setBaiHat(baiHat);
+                    baiHatDsYeuThichRepository.save(baiHatDsYeuThich);
+                } else {
+                    throw new RuntimeException("Bài hát không tồn tại.");
+                }
+            } else {
+                throw new RuntimeException("Danh sách yêu thích không phải loại 'custom'.");
+            }
+        } else {
+            throw new RuntimeException("Danh sách yêu thích không tồn tại.");
+        }
+    }
+
+
     public void removeBaiHatFromYeuThichCustom(BaiHatDsYeuThich_Request request) {
         // Kiểm tra xem id_ds có thuộc loại "custom" không
         Optional<DsYeuThich> dsYeuThichOptional = dsYeuThichRepository.findById(String.valueOf(request.getIdDs()));
@@ -294,6 +329,37 @@ public class DsYeuThichService {
             if (dsYeuThich.getLoaiDs() == DsYeuThich.LoaiDanhSach.custom) {
                 // Kiểm tra xem bài hát có tồn tại trong bảng baihat không
                 Optional<BaiHat> baiHatOptional = baiHatRepository.findById(String.valueOf(request.getIdBaihat()));
+                if (baiHatOptional.isPresent()) {
+                    BaiHat baiHat = baiHatOptional.get();
+
+                    // Kiểm tra sự tồn tại của bài hát trong danh sách yêu thích
+                    Optional<BaiHatDsYeuThich> baiHatDsYeuThichOptional = baiHatDsYeuThichRepository.findByDsYeuThichAndBaiHat(dsYeuThich, baiHat);
+                    if (baiHatDsYeuThichOptional.isPresent()) {
+                        // Nếu tìm thấy bài hát trong danh sách yêu thích, xóa nó
+                        BaiHatDsYeuThich baiHatDsYeuThich = baiHatDsYeuThichOptional.get();
+                        baiHatDsYeuThichRepository.delete(baiHatDsYeuThich);
+                    } else {
+                        throw new RuntimeException("Bài hát không có trong danh sách yêu thích.");
+                    }
+                } else {
+                    throw new RuntimeException("Bài hát không tồn tại.");
+                }
+            } else {
+                throw new RuntimeException("Danh sách yêu thích không phải loại 'custom'.");
+            }
+        } else {
+            throw new RuntimeException("Danh sách yêu thích không tồn tại.");
+        }
+    }
+
+    public void removeBaiHatFromYeuThichCustom(String idDs, String idBaihat) {
+        // Kiểm tra xem id_ds có thuộc loại "custom" không
+        Optional<DsYeuThich> dsYeuThichOptional = dsYeuThichRepository.findById(String.valueOf(idDs));
+        if (dsYeuThichOptional.isPresent()) {
+            DsYeuThich dsYeuThich = dsYeuThichOptional.get();
+            if (dsYeuThich.getLoaiDs() == DsYeuThich.LoaiDanhSach.custom) {
+                // Kiểm tra xem bài hát có tồn tại trong bảng baihat không
+                Optional<BaiHat> baiHatOptional = baiHatRepository.findById(String.valueOf(idBaihat));
                 if (baiHatOptional.isPresent()) {
                     BaiHat baiHat = baiHatOptional.get();
 
