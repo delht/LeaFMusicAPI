@@ -229,6 +229,34 @@ public class DsYeuThichService {
         dsYeuThichRepository.save(dsYeuThich);
     }
 
+
+
+    public DsYeuThich createDsYeuThich2(DsYeuThich_Request request) {
+        // Kiểm tra xem tài khoản có tồn tại hay không
+        TaiKhoan taiKhoan = taiKhoanRepository.findById(String.valueOf(request.getIdTaiKhoan()))
+                .orElseThrow(() -> new RuntimeException("Tài khoản không tồn tại"));
+
+        // Tạo mới đối tượng DsYeuThich
+        DsYeuThich dsYeuThich = new DsYeuThich();
+        dsYeuThich.setTenDs(request.getTenDs());
+        dsYeuThich.setTaiKhoan(taiKhoan);
+
+        // Set giá trị loaiDs mặc định là 'custom'
+        dsYeuThich.setLoaiDs(DsYeuThich.LoaiDanhSach.custom);
+
+        // Lưu vào cơ sở dữ liệu và trả về đối tượng vừa lưu
+        return dsYeuThichRepository.save(dsYeuThich);
+    }
+
+
+
+
+
+
+
+
+
+
     public void deleteDsYeuThich(Integer idDs) {
         // Kiểm tra xem danh sách yêu thích có tồn tại không
         DsYeuThich dsYeuThich = dsYeuThichRepository.findById(String.valueOf(idDs))

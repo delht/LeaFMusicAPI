@@ -130,6 +130,33 @@ public class DsYeuThichController {
         }
     }
 
+    @PostMapping("/create2")
+    public ResponseEntity<DsMacDinh_Respone> createDsYeuThich2(@RequestBody DsYeuThich_Request request) {
+        try {
+            // Gọi service để tạo mới danh sách yêu thích và nhận đối tượng vừa tạo
+            DsYeuThich dsYeuThich = dsYeuThichService.createDsYeuThich2(request);
+
+            // Tạo đối tượng phản hồi từ DsYeuThich
+            DsMacDinh_Respone response = DsMacDinh_Respone.builder()
+                    .id_ds(dsYeuThich.getIdDanhSach()) // Hoặc .getIdDs() tùy thuộc vào getter của bạn
+                    .loai_ds(dsYeuThich.getLoaiDs())
+                    .ten_ds(dsYeuThich.getTenDs())
+                    .build();
+
+            // Trả về ResponseEntity với HTTP 201 (CREATED)
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        } catch (RuntimeException e) {
+            // Trả về lỗi với HTTP 400 (BAD_REQUEST)
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+
+
+
+
+
+
+
     @DeleteMapping("/delete/id={id}")
     public ResponseEntity<String> deleteDsYeuThich(@PathVariable("id") Integer idDs) {
         try {
