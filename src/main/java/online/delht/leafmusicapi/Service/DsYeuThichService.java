@@ -176,6 +176,40 @@ public class DsYeuThichService {
         }
     }
 
+
+    public void removeBaiHatFromYeuThichMacDinh(String idDs, String idBaihat) {
+        // Kiểm tra xem id_ds có thuộc loại "macdinh" không
+        Optional<DsYeuThich> dsYeuThichOptional = dsYeuThichRepository.findById(idDs);
+        if (dsYeuThichOptional.isPresent()) {
+            DsYeuThich dsYeuThich = dsYeuThichOptional.get();
+            if (dsYeuThich.getLoaiDs() == DsYeuThich.LoaiDanhSach.macdinh) {
+                // Kiểm tra xem bài hát có tồn tại trong bảng baihat không
+                Optional<BaiHat> baiHatOptional = baiHatRepository.findById(idBaihat);
+                if (baiHatOptional.isPresent()) {
+                    BaiHat baiHat = baiHatOptional.get();
+
+                    // Kiểm tra sự tồn tại của bài hát trong danh sách yêu thích
+                    Optional<BaiHatDsYeuThich> baiHatDsYeuThichOptional = baiHatDsYeuThichRepository.findByDsYeuThichAndBaiHat(dsYeuThich, baiHat);
+                    if (baiHatDsYeuThichOptional.isPresent()) {
+                        // Nếu tìm thấy bài hát trong danh sách yêu thích, xóa nó
+                        BaiHatDsYeuThich baiHatDsYeuThich = baiHatDsYeuThichOptional.get();
+                        baiHatDsYeuThichRepository.delete(baiHatDsYeuThich);
+                    } else {
+                        throw new RuntimeException("Bài hát không có trong danh sách yêu thích.");
+                    }
+                } else {
+                    throw new RuntimeException("Bài hát không tồn tại.");
+                }
+            } else {
+                throw new RuntimeException("Danh sách yêu thích không phải loại 'macdinh'.");
+            }
+        } else {
+            throw new RuntimeException("Danh sách yêu thích không tồn tại.");
+        }
+    }
+
+
+
 //    =========================================================================================
 
     public void createDsYeuThich(DsYeuThich_Request request) {

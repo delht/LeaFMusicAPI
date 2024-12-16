@@ -105,6 +105,18 @@ public class DsYeuThichController {
         }
     }
 
+    @DeleteMapping("/removeMacDinh/{idDs}/{idBaihat}")
+    public ResponseEntity<String> removeBaiHatFromYeuThichMacDinh(@PathVariable("idDs") String idDs, @PathVariable("idBaihat") String idBaihat) {
+        try {
+            dsYeuThichService.removeBaiHatFromYeuThichMacDinh(idDs, idBaihat);
+            return ResponseEntity.ok("Bài hát đã được xóa khỏi danh sách yêu thích.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+
+
 //=============================================================================
 
     @PostMapping("/create")
