@@ -155,5 +155,14 @@ public class BaiHatController {
         return baiHatService.getBaiHatById2(id);
     }
 
+//    ===========================================
+
+    @GetMapping("/timkiem")
+    public ResponseEntity<List<BaiHat_GetRespone>> timKiemBaiHat(@RequestParam String ten) {
+        List<BaiHat_GetRespone> ketQua = baiHatService.timKiemBaiHat(ten);
+        return ResponseEntity.ok(ketQua);
+    }
+
+
 
 }

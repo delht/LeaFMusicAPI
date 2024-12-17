@@ -289,5 +289,14 @@ public class BaiHatService {
         return baiHatGetRespone;
     }
 
+//    =============================
+
+    public List<BaiHat_GetRespone> timKiemBaiHat(String tuKhoa) {
+        return baiHatRepository.findByTenContainingIgnoreCase(tuKhoa);
+    }
+
 
 }
+
+
+
