@@ -2,6 +2,7 @@ package online.delht.leafmusicapi.Repository;
 
 import online.delht.leafmusicapi.Entity.BaiHat;
 import online.delht.leafmusicapi.dto.reponse.BaiHat_Respone.BaiHat_GetRespone;
+import online.delht.leafmusicapi.dto.reponse.SearchResult;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -22,5 +23,10 @@ public interface BaiHatRepository extends JpaRepository<BaiHat, String> {
             "FROM BaiHat b WHERE b.tenBaiHat LIKE %:tenBaiHat%")
     List<BaiHat_GetRespone> findByTenContainingIgnoreCase(@Param("tenBaiHat") String tenBaiHat);
 
+//    ===========================================================
+
+    @Query("SELECT new online.delht.leafmusicapi.dto.reponse.SearchResult(s.idBaiHat, s.tenBaiHat, 'baihat') " +
+            "FROM BaiHat s WHERE s.tenBaiHat LIKE %:query%")
+    List<SearchResult> searchSongs(@Param("query") String query);
 
 }
