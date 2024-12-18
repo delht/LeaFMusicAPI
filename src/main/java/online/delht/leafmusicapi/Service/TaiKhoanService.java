@@ -45,7 +45,8 @@ public class TaiKhoanService {
 
         DsYeuThich dsYeuThich = new DsYeuThich();
         dsYeuThich.setTaiKhoan(taiKhoan);
-        dsYeuThich.setTenDs("Danh sách yêu thích của "+ username);
+//        dsYeuThich.setTenDs("Danh sách yêu thích của "+ username);
+        dsYeuThich.setTenDs("Danh sách yêu thích");
         dsYeuThich.setLoaiDs(DsYeuThich.LoaiDanhSach.macdinh);
         dsYeuThichRepository.save(dsYeuThich);
 
