@@ -3,6 +3,7 @@ package online.delht.leafmusicapi.Controller;
 import jakarta.servlet.http.HttpSession;
 import online.delht.leafmusicapi.Service.EmailService;
 import online.delht.leafmusicapi.Service.TaiKhoanService;
+import online.delht.leafmusicapi.Utils.VerificationCodeCache;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -27,7 +28,6 @@ public class ForgotPasswordController {
     private TaiKhoanService taikhoanService;
 
 
-    // API gửi mã xác nhận
     @PostMapping("/forgot-password")
     public ResponseEntity<?> forgotPassword(@RequestParam String email) {
         // Kiểm tra định dạng email
@@ -38,9 +38,8 @@ public class ForgotPasswordController {
         // Tạo mã xác nhận
         String verificationCode = UUID.randomUUID().toString().substring(0, 6); // 6 ký tự ngẫu nhiên
 
-        // Lưu mã xác nhận vào session
-        session.setAttribute("verificationCode", verificationCode);
-        session.setAttribute("email", email);
+        // Lưu mã xác nhận vào bộ nhớ tạm
+        VerificationCodeCache.saveCode(email, verificationCode);
 
         // Gửi email
         String subject = "Mã xác nhận quên mật khẩu";
@@ -52,15 +51,11 @@ public class ForgotPasswordController {
 
     // API xác nhận mã và đổi mật khẩu
     @PostMapping("/reset-password")
-    public ResponseEntity<?> resetPassword(
-            @RequestParam String code,
-            @RequestParam String newPassword) {
+    public ResponseEntity<?> resetPassword(@RequestParam String code, @RequestParam String newPassword, @RequestParam String email) {
+        // Lấy mã xác nhận từ bộ nhớ tạm
+        String savedCode = VerificationCodeCache.getCode(email);
 
-        // Lấy mã và email từ session
-        String savedCode = (String) session.getAttribute("verificationCode");
-        String savedEmail = (String) session.getAttribute("email");
-
-        if (savedCode == null || savedEmail == null) {
+        if (savedCode == null) {
             return ResponseEntity.badRequest().body("Yêu cầu quên mật khẩu đã hết hạn.");
         }
 
@@ -70,11 +65,10 @@ public class ForgotPasswordController {
         }
 
         // Gọi service để đổi mật khẩu cho tài khoản có email đã lưu
-        boolean isChanged = taikhoanService.doiMatKhauMail(savedEmail, newPassword);
+        boolean isChanged = taikhoanService.doiMatKhauMail(email, newPassword);
 
         if (isChanged) {
-            session.removeAttribute("verificationCode");
-            session.removeAttribute("email");
+            VerificationCodeCache.removeCode(email);  // Xóa mã xác nhận sau khi sử dụng
             return ResponseEntity.ok("Mật khẩu của bạn đã được thay đổi.");
         } else {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Không thể thay đổi mật khẩu.");
