@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.regex.Pattern;
+
 @RestController
 @RequestMapping("/taikhoan")
 public class TaiKhoanController {
@@ -25,12 +27,25 @@ public class TaiKhoanController {
     @PostMapping("/tao")
     public ResponseEntity<?> taoTaiKhoan(@RequestBody TaiKhoan_Create_Request request) {
         try {
+            // Kiểm tra nếu username là một email hợp lệ
+            if (!isValidEmail(request.getUsername())) {
+                return ResponseEntity.badRequest().body("Vui lòng nhập địa chỉ email hợp lệ.");
+            }
+
             TaiKhoan taiKhoan = taiKhoanService.taoTaiKhoan(request.getUsername(), request.getPassword());
             return ResponseEntity.ok("Tài khoản được tạo thành công với ID: " + taiKhoan.getIdTaiKhoan());
         } catch (RuntimeException e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    private boolean isValidEmail(String email) {
+        String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+        Pattern pattern = Pattern.compile(emailRegex);
+        return pattern.matcher(email).matches();
+    }
+
+//    ------
 
     @PostMapping("/dangnhap")
     public ResponseEntity<?> dangNhap(@RequestBody TaiKhoan_DangNhap_Request request) {

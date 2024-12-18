@@ -30,7 +30,7 @@ public class TaiKhoanService {
     public TaiKhoan taoTaiKhoan(String username, String password) {
 
         if (taiKhoanRepository.existsByUsername(username)) {
-            throw new RuntimeException("Da cos username");
+            throw new RuntimeException("Email này đã được đăng ký");
         }
 
         String passwordmahoa = PasswordUtil.maHoaPassword(password);
