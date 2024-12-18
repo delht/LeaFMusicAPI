@@ -14,6 +14,7 @@ import online.delht.leafmusicapi.Utils.PasswordUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor //bo autowired
@@ -82,7 +83,6 @@ public class TaiKhoanService {
 
 //==============================================================================
 
-
     public boolean doiMatKhau(String idTaiKhoan, String oldPassword, String newPassword) {
 
         TaiKhoan taiKhoan = taiKhoanRepository.findById(idTaiKhoan)
@@ -102,6 +102,34 @@ public class TaiKhoanService {
 
         return true;
     }
+
+//    =================================================================================
+//    =================================================================================
+//    =================================================================================
+
+
+    public boolean doiMatKhauMail(String username, String newPassword) {
+        TaiKhoan taiKhoan = taiKhoanRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("Tài khoản không tồn tại."));
+
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_+=<>?";
+        Random rand = new Random();
+        StringBuilder password = new StringBuilder();
+        for (int i = 0; i < 8; i++) {  // Tạo mật khẩu dài 8 ký tự
+            password.append(characters.charAt(rand.nextInt(characters.length())));
+        }
+        String newPasswordHashed =  password.toString();
+
+        newPasswordHashed = PasswordUtil.maHoaPassword(newPassword);
+
+        taiKhoan.setPassword(newPasswordHashed);
+        taiKhoanRepository.save(taiKhoan);
+
+        return true;
+    }
+
+
+
 
 
 
