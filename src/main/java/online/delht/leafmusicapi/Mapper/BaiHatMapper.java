@@ -57,6 +57,20 @@ public interface BaiHatMapper {
     BaiHat_ChiTiet_GetRespone toBaiHat2(BaiHat request); //Lay gia tri truyen vao
 
 
+
+//    =============================================================
+
+    // Phương thức để chuyển từ Entity BaiHat sang DTO BaiHat_GetRespone
+    @Mapping(source = "caSi.tenCaSi", target = "caSi")
+    @Mapping(source = "theLoai.tenTheLoai", target = "theLoai")
+    @Mapping(source = "album.tenAlbum", target = "album")
+    @Mapping(source = "khuVucNhac.tenKhuVuc", target = "khuVucNhac")
+    @Mapping(source = "urlHinh", target = "urlHinh")
+    @Mapping(source = "urlFile", target = "urlFile")
+    @Mapping(source = "ngayPhatHanh", target = "ngayPhatHanh")
+    BaiHat_GetRespone toBaiHat_GetRespone(BaiHat baiHat);
+
+
 }
 
 

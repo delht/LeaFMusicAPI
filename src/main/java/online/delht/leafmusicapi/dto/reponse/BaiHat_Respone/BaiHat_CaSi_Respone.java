@@ -5,20 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BaiHat_DS_YeuThich {
+public class BaiHat_CaSi_Respone {
     private Integer idBaiHat;
     private String tenBaiHat;
-    private String caSi;
-    private String theLoai;
-    private String album;
-    private String khuVucNhac;
     private String urlHinh;
-    private String urlFile;
-    private LocalDateTime ngayPhatHanh;
 }

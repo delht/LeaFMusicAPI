@@ -105,6 +105,18 @@ public class DsYeuThichController {
         }
     }
 
+    @DeleteMapping("/removeMacDinh/{idDs}/{idBaihat}")
+    public ResponseEntity<String> removeBaiHatFromYeuThichMacDinh(@PathVariable("idDs") String idDs, @PathVariable("idBaihat") String idBaihat) {
+        try {
+            dsYeuThichService.removeBaiHatFromYeuThichMacDinh(idDs, idBaihat);
+            return ResponseEntity.ok("Bài hát đã được xóa khỏi danh sách yêu thích.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+
+
 //=============================================================================
 
     @PostMapping("/create")
@@ -117,6 +129,33 @@ public class DsYeuThichController {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
         }
     }
+
+    @PostMapping("/create2")
+    public ResponseEntity<DsMacDinh_Respone> createDsYeuThich2(@RequestBody DsYeuThich_Request request) {
+        try {
+            // Gọi service để tạo mới danh sách yêu thích và nhận đối tượng vừa tạo
+            DsYeuThich dsYeuThich = dsYeuThichService.createDsYeuThich2(request);
+
+            // Tạo đối tượng phản hồi từ DsYeuThich
+            DsMacDinh_Respone response = DsMacDinh_Respone.builder()
+                    .id_ds(dsYeuThich.getIdDanhSach()) // Hoặc .getIdDs() tùy thuộc vào getter của bạn
+                    .loai_ds(dsYeuThich.getLoaiDs())
+                    .ten_ds(dsYeuThich.getTenDs())
+                    .build();
+
+            // Trả về ResponseEntity với HTTP 201 (CREATED)
+            return ResponseEntity.status(HttpStatus.CREATED).body(response);
+        } catch (RuntimeException e) {
+            // Trả về lỗi với HTTP 400 (BAD_REQUEST)
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        }
+    }
+
+
+
+
+
+
 
     @DeleteMapping("/delete/id={id}")
     public ResponseEntity<String> deleteDsYeuThich(@PathVariable("id") Integer idDs) {
@@ -139,6 +178,20 @@ public class DsYeuThichController {
         }
     }
 
+
+    @PutMapping("/update2/id={id}")
+    public ResponseEntity<String> updateTenDs2(@PathVariable("id") Integer idDs, @RequestBody String tenDs) {
+        try {
+            // Gọi service để sửa tên danh sách yêu thích
+            dsYeuThichService.updateTenDs(idDs, tenDs);
+            return ResponseEntity.status(HttpStatus.OK).body("Tên danh sách yêu thích đã được cập nhật.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
+
+
 //    =========================
 
     @PostMapping("/addCustom")
@@ -151,10 +204,30 @@ public class DsYeuThichController {
         }
     }
 
+    @PostMapping("/addCustom/{idDs}/{idBaiHat}")
+    public ResponseEntity<String> addBaiHatToYeuThichCustom(@PathVariable("idDs") String idDs, @PathVariable("idBaiHat") String idBaihat) {
+        try {
+            dsYeuThichService.addBaiHatToYeuThichCustom(idDs, idBaihat);
+            return ResponseEntity.ok("Bài hát đã được thêm vào danh sách yêu thích.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
     @DeleteMapping("/removeCustom")
     public ResponseEntity<String> removeBaiHatFromYeuThichCustom(@RequestBody BaiHatDsYeuThich_Request request) {
         try {
             dsYeuThichService.removeBaiHatFromYeuThichCustom(request);
+            return ResponseEntity.ok("Bài hát đã được xóa khỏi danh sách yêu thích.");
+        } catch (RuntimeException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+        }
+    }
+
+    @DeleteMapping("/removeCustom/{idDs}/{idBaiHat}")
+    public ResponseEntity<String> removeBaiHatFromYeuThichCustom(@PathVariable("idDs") String idDs, @PathVariable("idBaiHat") String idBaihat) {
+        try {
+            dsYeuThichService.removeBaiHatFromYeuThichCustom(idDs, idBaihat);
             return ResponseEntity.ok("Bài hát đã được xóa khỏi danh sách yêu thích.");
         } catch (RuntimeException e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

@@ -14,6 +14,7 @@ import online.delht.leafmusicapi.Utils.PasswordUtil;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.Random;
 
 @Service
 @RequiredArgsConstructor //bo autowired
@@ -30,7 +31,7 @@ public class TaiKhoanService {
     public TaiKhoan taoTaiKhoan(String username, String password) {
 
         if (taiKhoanRepository.existsByUsername(username)) {
-            throw new RuntimeException("Da cos username");
+            throw new RuntimeException("Email này đã được đăng ký");
         }
 
         String passwordmahoa = PasswordUtil.maHoaPassword(password);
@@ -44,7 +45,8 @@ public class TaiKhoanService {
 
         DsYeuThich dsYeuThich = new DsYeuThich();
         dsYeuThich.setTaiKhoan(taiKhoan);
-        dsYeuThich.setTenDs("Danh sách yêu thích của "+ username);
+//        dsYeuThich.setTenDs("Danh sách yêu thích của "+ username);
+        dsYeuThich.setTenDs("Danh sách yêu thích");
         dsYeuThich.setLoaiDs(DsYeuThich.LoaiDanhSach.macdinh);
         dsYeuThichRepository.save(dsYeuThich);
 
@@ -79,6 +81,55 @@ public class TaiKhoanService {
         }
         return null;
     }
+
+//==============================================================================
+
+    public boolean doiMatKhau(String idTaiKhoan, String oldPassword, String newPassword) {
+
+        TaiKhoan taiKhoan = taiKhoanRepository.findById(idTaiKhoan)
+                .orElseThrow(() -> new RuntimeException("Tài khoản không tồn tại."));
+
+
+        String oldPasswordHashed = PasswordUtil.maHoaPassword(oldPassword);
+
+        if (!taiKhoan.getPassword().equals(oldPasswordHashed)) {
+            throw new RuntimeException("Mật khẩu cũ không đúng.");
+        }
+
+        String newPasswordHashed = PasswordUtil.maHoaPassword(newPassword);
+
+        taiKhoan.setPassword(newPasswordHashed);
+        taiKhoanRepository.save(taiKhoan);
+
+        return true;
+    }
+
+//    =================================================================================
+//    =================================================================================
+//    =================================================================================
+
+
+    public boolean doiMatKhauMail(String username, String newPassword) {
+        TaiKhoan taiKhoan = taiKhoanRepository.findByUsername(username)
+                .orElseThrow(() -> new RuntimeException("Tài khoản không tồn tại."));
+
+        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_+=<>?";
+        Random rand = new Random();
+        StringBuilder password = new StringBuilder();
+        for (int i = 0; i < 8; i++) {  // Tạo mật khẩu dài 8 ký tự
+            password.append(characters.charAt(rand.nextInt(characters.length())));
+        }
+        String newPasswordHashed =  password.toString();
+
+        newPasswordHashed = PasswordUtil.maHoaPassword(newPassword);
+
+        taiKhoan.setPassword(newPasswordHashed);
+        taiKhoanRepository.save(taiKhoan);
+
+        return true;
+    }
+
+
 
 
 
