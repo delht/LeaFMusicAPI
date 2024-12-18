@@ -5,6 +5,7 @@ import online.delht.leafmusicapi.Service.TaiKhoanService;
 import online.delht.leafmusicapi.dto.reponse.Login_Respone.Login_Respone;
 import online.delht.leafmusicapi.dto.request.TaiKhoan_Create_Request;
 import online.delht.leafmusicapi.dto.request.TaiKhoan_DangNhap_Request;
+import online.delht.leafmusicapi.dto.request.TaiKhoan_DoiMatKhau_Request;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -61,6 +62,24 @@ public class TaiKhoanController {
             return ResponseEntity.badRequest().body(null);
         }
     }
+
+//=========================================================
+
+    @PostMapping("/doimatkhau")
+    public ResponseEntity<?> doiMatKhau(@RequestBody TaiKhoan_DoiMatKhau_Request request) {
+        try {
+            boolean isChanged = taiKhoanService.doiMatKhau(request.getIdTaiKhoan(), request.getOldPassword(), request.getNewPassword());
+
+            if (isChanged) {
+                return ResponseEntity.ok("Mật khẩu đã được thay đổi thành công!");
+            } else {
+                return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Không thể thay đổi mật khẩu.");
+            }
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
 
 
 

@@ -80,6 +80,28 @@ public class TaiKhoanService {
         return null;
     }
 
+//==============================================================================
+
+
+    public boolean doiMatKhau(String idTaiKhoan, String oldPassword, String newPassword) {
+
+        TaiKhoan taiKhoan = taiKhoanRepository.findById(idTaiKhoan)
+                .orElseThrow(() -> new RuntimeException("Tài khoản không tồn tại."));
+
+
+        String oldPasswordHashed = PasswordUtil.maHoaPassword(oldPassword);
+
+        if (!taiKhoan.getPassword().equals(oldPasswordHashed)) {
+            throw new RuntimeException("Mật khẩu cũ không đúng.");
+        }
+
+        String newPasswordHashed = PasswordUtil.maHoaPassword(newPassword);
+
+        taiKhoan.setPassword(newPasswordHashed);
+        taiKhoanRepository.save(taiKhoan);
+
+        return true;
+    }
 
 
 
