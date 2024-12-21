@@ -22,8 +22,9 @@ public interface AlbumRepository extends JpaRepository<Album, String> {
 
 //    =============================================
 
-    @Query("SELECT new online.delht.leafmusicapi.dto.reponse.SearchResult(al.idAlbum, al.tenAlbum, 'album') " +
+    @Query("SELECT new online.delht.leafmusicapi.dto.reponse.SearchResult(al.idAlbum, al.tenAlbum, 'album', al.urlHinh) " +
             "FROM Album al WHERE al.tenAlbum LIKE %:query%")
     List<SearchResult> searchAlbums(@Param("query") String query);
 
 }
+

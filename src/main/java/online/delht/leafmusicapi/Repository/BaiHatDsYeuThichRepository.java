@@ -26,9 +26,6 @@ public interface BaiHatDsYeuThichRepository extends JpaRepository<BaiHatDsYeuThi
     Optional<BaiHatDsYeuThich> findByDsYeuThichAndBaiHat(DsYeuThich dsYeuThich, BaiHat baiHat);
 
 
-
-
-
 //    @Query("SELECT b FROM BaiHat b WHERE b.idBaiHat IN (SELECT bdy.baiHat.idBaiHat FROM BaiHatDsYeuThich bdy WHERE bdy.dsYeuThich.idDanhSach = :idDs)")
 //    List<BaiHat_DS_YeuThich> findBaiHatByIdDanhSach(@Param("idDs") Integer idDs);
 

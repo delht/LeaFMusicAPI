@@ -12,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class Login_Respone {
     private String id_taikhoan;
     private String username;
+    private String vaitro;
 }

@@ -34,8 +34,6 @@ public interface BaiHatMapper {
     })
     BaiHat_ChiTiet_GetRespone toBaiHat_ChiTiet_GetRespone(BaiHat respone);
 
-
-
 //  DUNG DC
 //    @Mappings({
 //            @Mapping(target = "caSi.idCaSi", source = "caSi"),
@@ -47,6 +45,8 @@ public interface BaiHatMapper {
 //    BaiHat toBaiHat2(BaiHat_CreateRequest request);
 
 
+    //    ============================================================= Khong su dung
+
         @Mappings({
             @Mapping(target = "caSi", source = "caSi"),
             @Mapping(target = "theLoai", source = "theLoai"),
@@ -56,9 +56,6 @@ public interface BaiHatMapper {
     })
     BaiHat_ChiTiet_GetRespone toBaiHat2(BaiHat request); //Lay gia tri truyen vao
 
-
-
-//    =============================================================
 
     // Phương thức để chuyển từ Entity BaiHat sang DTO BaiHat_GetRespone
     @Mapping(source = "caSi.tenCaSi", target = "caSi")

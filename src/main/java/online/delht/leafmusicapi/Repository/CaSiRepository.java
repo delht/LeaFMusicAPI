@@ -26,7 +26,7 @@ public interface CaSiRepository extends JpaRepository<CaSi, String> {
     Optional<CaSi> findTenCaSiWithBaiHatsByTenCaSi(@Param("name") String tenCaSi);
 
 //    ====================================================
-@Query("SELECT new online.delht.leafmusicapi.dto.reponse.SearchResult(a.idCaSi, a.tenCaSi, 'casi') " +
+@Query("SELECT new online.delht.leafmusicapi.dto.reponse.SearchResult(a.idCaSi, a.tenCaSi, 'casi', a.urlHinh) " +
         "FROM CaSi a WHERE a.tenCaSi LIKE %:query%")
 List<SearchResult> searchArtists(@Param("query") String query);
 

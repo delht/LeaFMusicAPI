@@ -33,13 +33,14 @@ public class AlbumService {
     AlbumRepository albumRepository;
     AlbumMapper albumMapper;
 
+    //lay album theo id
     public Album_BaiHat_Respone getAlbumBaiHat(String id) {
         Album album = albumRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Album not found"));
+                .orElseThrow(() -> new RuntimeException("Khong tim thay album"));
         return albumMapper.to_Album_BaiHat_Respone(album);
     }
 
-    //    ==========================================================================================
+    //    ================================== Xu ly file
     DeleteFile deleteFile;
     UploadFile uploadFile;
     GetPubID_Util getPubIDUtil;
@@ -50,7 +51,7 @@ public class AlbumService {
     public Album addAlbum(MultipartFile img, Album_Request albumRequest) throws IOException {
         try {
             CaSi caSi = CaSiRepository.findById(String.valueOf(albumRequest.getId_casi()))
-                    .orElseThrow(() -> new RuntimeException("Ca sĩ không tồn tại với ID: " + albumRequest.getId_casi()));
+                    .orElseThrow(() -> new RuntimeException("khong co ca si vs album ID: " + albumRequest.getId_casi()));
 
             System.out.println("test");
 
@@ -61,11 +62,11 @@ public class AlbumService {
             album.setCaSi(new CaSi(albumRequest.getId_casi()));
             album.setUrlHinh(fileUrlImg);
 
-            System.out.println("Saving album: " + album.getTenAlbum() + ", Image URL: " + fileUrlImg);
+            System.out.println("Luu album: " + album.getTenAlbum() + ", Image URL: " + fileUrlImg);
 
             return albumRepository.save(album);
         } catch (IOException e) {
-            throw new IOException("Có lỗi khi xử lý file ảnh", e);
+            throw new IOException("Error khi xu ly anh", e);
         }
     }
 

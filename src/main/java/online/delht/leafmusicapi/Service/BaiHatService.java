@@ -31,9 +31,8 @@ import java.util.stream.Collectors;
 @FieldDefaults(level = AccessLevel.PRIVATE, makeFinal = true) //bo private
 @Slf4j
 public class BaiHatService {
-//    @Autowired
+
     BaiHatRepository baiHatRepository;
-//    @Autowired
     BaiHatMapper baiHatMapper;
 
 
@@ -221,7 +220,6 @@ public class BaiHatService {
         return baiHatRepository.findById(String.valueOf(idBaiHat)).orElse(null);
     }
 
-
     //    ========================================================================
 
     public List<BaiHat_List> getAllBaiHats() {
@@ -255,8 +253,6 @@ public class BaiHatService {
                         .build())
                 .collect(Collectors.toList());
     }
-
-
 
 
 //    =================
