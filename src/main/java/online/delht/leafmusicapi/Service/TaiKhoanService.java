@@ -53,6 +53,7 @@ public class TaiKhoanService {
         return taiKhoan;
     }
 
+    //ko su dung
     public boolean dangNhap(String username, String password) {
         TaiKhoan taiKhoan = taiKhoanRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("Ko co tai khoan"));
@@ -112,15 +113,17 @@ public class TaiKhoanService {
         TaiKhoan taiKhoan = taiKhoanRepository.findByUsername(username)
                 .orElseThrow(() -> new RuntimeException("Tài khoản không tồn tại."));
 
-        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_+=<>?";
-        Random rand = new Random();
-        StringBuilder password = new StringBuilder();
-        for (int i = 0; i < 8; i++) {  // Tạo mật khẩu dài 8 ký tự
-            password.append(characters.charAt(rand.nextInt(characters.length())));
-        }
-        String newPasswordHashed =  password.toString();
+//        String characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()-_+=<>?";
+//        Random rand = new Random();
+//        StringBuilder password = new StringBuilder();
+//        for (int i = 0; i < 8; i++) {  // Tạo mật khẩu dài 8 ký tự
+//            password.append(characters.charAt(rand.nextInt(characters.length())));
+//        }
+//        String newPasswordHashed =  password.toString();
+//
+//        newPasswordHashed = PasswordUtil.maHoaPassword(newPassword);
 
-        newPasswordHashed = PasswordUtil.maHoaPassword(newPassword);
+        String newPasswordHashed = PasswordUtil.maHoaPassword(newPassword);
 
         taiKhoan.setPassword(newPasswordHashed);
         taiKhoanRepository.save(taiKhoan);

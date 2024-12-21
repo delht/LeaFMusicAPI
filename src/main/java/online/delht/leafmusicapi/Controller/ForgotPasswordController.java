@@ -30,7 +30,7 @@ public class ForgotPasswordController {
 
     @PostMapping("/forgot-password")
     public ResponseEntity<?> forgotPassword(@RequestParam String email) {
-        // Kiểm tra định dạng email
+        // check mail
         if (!email.matches("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
             return ResponseEntity.badRequest().body("Email không hợp lệ.");
         }
@@ -38,7 +38,7 @@ public class ForgotPasswordController {
         // Tạo mã xác nhận
         String verificationCode = UUID.randomUUID().toString().substring(0, 6); // 6 ký tự ngẫu nhiên
 
-        // Lưu mã xác nhận vào bộ nhớ tạm
+        // luu vao cache verify...
         VerificationCodeCache.saveCode(email, verificationCode);
 
         // Gửi email
@@ -50,29 +50,27 @@ public class ForgotPasswordController {
     }
 
     // API xác nhận mã và đổi mật khẩu
-    @PostMapping("/reset-password")
-    public ResponseEntity<?> resetPassword(@RequestParam String code, @RequestParam String newPassword, @RequestParam String email) {
-        // Lấy mã xác nhận từ bộ nhớ tạm
-        String savedCode = VerificationCodeCache.getCode(email);
+        @PostMapping("/reset-password")
+        public ResponseEntity<?> resetPassword(@RequestParam String code, @RequestParam String newPassword, @RequestParam String email) {
+            // Lấy mã xác nhận trong cache
+            String savedCode = VerificationCodeCache.getCode(email);
 
-        if (savedCode == null) {
-            return ResponseEntity.badRequest().body("Yêu cầu quên mật khẩu đã hết hạn.");
+            if (savedCode == null) {
+                return ResponseEntity.badRequest().body("Yêu cầu quên mật khẩu đã hết hạn.");
+            }
+
+            if (!savedCode.equals(code)) {
+                return ResponseEntity.badRequest().body("Mã xác nhận không chính xác.");
+            }
+
+            boolean isChanged = taikhoanService.doiMatKhauMail(email, newPassword);
+
+            if (isChanged) {
+                VerificationCodeCache.removeCode(email);
+                return ResponseEntity.ok("Mật khẩu của bạn đã được thay đổi.");
+            } else {
+                return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Không thể thay đổi mật khẩu.");
+            }
         }
-
-        // Kiểm tra mã xác nhận
-        if (!savedCode.equals(code)) {
-            return ResponseEntity.badRequest().body("Mã xác nhận không chính xác.");
-        }
-
-        // Gọi service để đổi mật khẩu cho tài khoản có email đã lưu
-        boolean isChanged = taikhoanService.doiMatKhauMail(email, newPassword);
-
-        if (isChanged) {
-            VerificationCodeCache.removeCode(email);  // Xóa mã xác nhận sau khi sử dụng
-            return ResponseEntity.ok("Mật khẩu của bạn đã được thay đổi.");
-        } else {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Không thể thay đổi mật khẩu.");
-        }
-    }
 
 }

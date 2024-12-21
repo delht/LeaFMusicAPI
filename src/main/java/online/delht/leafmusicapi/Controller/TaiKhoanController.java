@@ -27,7 +27,7 @@ public class TaiKhoanController {
     @PostMapping("/tao")
     public ResponseEntity<?> taoTaiKhoan(@RequestBody TaiKhoan_Create_Request request) {
         try {
-            // Kiểm tra nếu username là một email hợp lệ
+            // check email hợp ệ
             if (!isValidEmail(request.getUsername())) {
                 return ResponseEntity.badRequest().body("Vui lòng nhập địa chỉ email hợp lệ.");
             }
@@ -47,6 +47,7 @@ public class TaiKhoanController {
 
 //    ------
 
+    //ko dung
     @PostMapping("/dangnhap")
     public ResponseEntity<?> dangNhap(@RequestBody TaiKhoan_DangNhap_Request request) {
         try {
