@@ -248,15 +248,6 @@ public class DsYeuThichService {
         return dsYeuThichRepository.save(dsYeuThich);
     }
 
-
-
-
-
-
-
-
-
-
     public void deleteDsYeuThich(Integer idDs) {
         // Kiểm tra xem danh sách yêu thích có tồn tại không
         DsYeuThich dsYeuThich = dsYeuThichRepository.findById(String.valueOf(idDs))
@@ -314,7 +305,6 @@ public class DsYeuThichService {
         }
     }
 
-
     public void addBaiHatToYeuThichCustom(String idDs, String idBaihat) {
         // Kiểm tra xem id_ds có thuộc loại "custom" không
         Optional<DsYeuThich> dsYeuThichOptional = dsYeuThichRepository.findById(String.valueOf(idDs));
@@ -347,7 +337,6 @@ public class DsYeuThichService {
             throw new RuntimeException("Danh sách yêu thích không tồn tại.");
         }
     }
-
 
     public void removeBaiHatFromYeuThichCustom(BaiHatDsYeuThich_Request request) {
         // Kiểm tra xem id_ds có thuộc loại "custom" không

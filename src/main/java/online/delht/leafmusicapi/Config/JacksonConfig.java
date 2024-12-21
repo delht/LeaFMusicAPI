@@ -6,11 +6,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class JacksonConfig {
+public class JacksonConfig { //Chuyen doi timelocal thanh mang obj chua cac gia tri thoi gian
     @Bean
     public ObjectMapper objectMapper() {
         ObjectMapper objectMapper = new ObjectMapper();
-        objectMapper.registerModule(new JavaTimeModule()); // Đăng ký JavaTimeModule để hỗ trợ LocalDateTime
+        objectMapper.registerModule(new JavaTimeModule()); //  JavaTimeModule hỗ trợ LocalDateTime
         return objectMapper;
     }
 }

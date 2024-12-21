@@ -68,7 +68,11 @@ public class TaiKhoanController {
         try {
             TaiKhoan taiKhoan = taiKhoanService.dangNhap2(request.getUsername(), request.getPassword());
             if (taiKhoan != null) {
-                Login_Respone loginResponse = new Login_Respone(taiKhoan.getIdTaiKhoan().toString(), taiKhoan.getUsername());
+                Login_Respone loginResponse = new Login_Respone(
+                        taiKhoan.getIdTaiKhoan().toString(),
+                        taiKhoan.getUsername(),
+                        taiKhoan.getVaiTro().toString()
+                );
                 return ResponseEntity.ok(loginResponse);
             } else {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);

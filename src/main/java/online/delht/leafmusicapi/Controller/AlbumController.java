@@ -34,7 +34,6 @@ public class AlbumController {
         return ResponseEntity.ok(album);
     }
 
-
     @PostMapping("/add")
     public ResponseEntity<?> addAlbum(
             @RequestParam("img") MultipartFile img, @RequestParam("album") String albumRequestJson) { // Dùng String cho dữ liệu JSON
@@ -113,4 +112,5 @@ public class AlbumController {
     public List<Album_List> getAllAlbum() {
         return albumService.getAllAlbums();
     }
+
 }

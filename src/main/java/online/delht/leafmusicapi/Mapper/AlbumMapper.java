@@ -18,6 +18,12 @@ import java.util.stream.Collectors;
 @Mapper(componentModel = "spring")
 public interface AlbumMapper {
 
+    /*
+    * src: la doi tuong goc (ben trong ngoac) Album
+    * target: la doi tuong muc tieu Album_BaiHat_Respone
+    * tuc la id, ten, baihats cua Album se duoc anh xa vafo Album_BaiHat_Respone
+    */
+
     @Mappings({
             @Mapping(source = "caSi.tenCaSi", target = "tenCaSi"),
             @Mapping(source = "caSi.idCaSi", target = "idCaSi"),
@@ -45,6 +51,7 @@ public interface AlbumMapper {
     })
     Album toAlbum(Album_Request albumRequest);
 
+//    ================================================= ko su dung
 
     @Mappings({
             @Mapping(source = "idAlbum", target = "idAlbum"),

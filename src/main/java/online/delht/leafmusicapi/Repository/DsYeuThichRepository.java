@@ -13,6 +13,7 @@ import java.util.Optional;
 
 @Repository
 public interface DsYeuThichRepository extends JpaRepository<DsYeuThich, String> {
+
     List<DsYeuThich> findByTaiKhoan_IdTaiKhoan(Integer idTaiKhoan);
 
 //===========================================================================
